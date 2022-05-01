@@ -1,0 +1,54 @@
+.header {
+    margin: 0 auto;
+    padding-top: 25px;
+    font-weight: 600;
+
+    .menu__list {
+        li {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            &:hover {
+                transition: all 0.2s ease;
+                color: #FF9619;
+            }
+        }
+        .tel {
+            font-family: 'Open Sans', sans-serif;
+        }
+        svg * {
+            transition: all 0.2s ease;
+
+        }
+        svg {
+            &:hover * {
+                transition: all 0.2s ease;
+                stroke: #FF9619;
+            }
+
+        }
+    }
+
+    .furniture {
+        margin-top: 55px;
+        li {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            &:hover {
+                transition: all 0.2s ease;
+                color: #FF9619;
+            }
+
+            img {
+                width: 181px;
+                height: 122px;
+            }
+            span {
+                display: block;
+                margin: 0 auto;
+                text-align: center;
+
+            }
+        }
+    }
+}
+

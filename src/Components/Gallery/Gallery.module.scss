@@ -1,0 +1,45 @@
+.gallery {
+  margin-top: 64px;
+
+  .searchRow {
+    flex: 1;
+    margin-bottom: 62px;
+
+    .menu {
+      position: relative;
+      flex: 1;
+      cursor: pointer;
+
+      .gallery__allModels {
+        margin-right: 5px;
+        font-size: 18px;
+      }
+    }
+
+    .layout {
+      .layout8 {
+        margin-right: 20px;
+      }
+      .layout4 {
+        margin-right: 43px;
+      }
+    }
+
+    .searchInput{
+      input {
+        height: 36px;
+        width: 270px;
+        padding: 7px 30px 7px 12px;
+      }
+      svg {
+        position: absolute;
+        top: 9px;
+        right: 12px;
+      }
+    }
+  }
+
+  .models {
+
+  }
+}

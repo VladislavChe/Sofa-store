@@ -1,0 +1,117 @@
+$mainFont: 'Raleway', sans-serif;
+$OpenSans: 'Open Sans', sans-serif;
+$mainFontSize: 13px;
+$time: all 0.2s ease-in-out;
+$hoverColor: #FF9619;
+
+html,
+body {
+  height: 100%;
+  background-color: #fff;
+  font-family: $mainFont;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  color: #000;
+  font-size: $mainFontSize;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+  body *,
+  body *:before,
+  body *:after {
+    box-sizing: border-box;
+  }
+}
+
+div,
+textarea,
+p,
+input,
+form,
+span,
+ul,
+li {
+  font-family: $mainFont;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $mainFont;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+address,
+blockquote,
+figure,
+figcaption,
+main,
+details,
+fieldset {
+  display: block;
+  border: 0;
+  font-style: normal;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  box-sizing: border-box;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style-type: none;
+  border: none;
+  outline: none !important;
+  transition: all 0.2s ease-in-out;
+  &:hover,
+  &:active {
+    text-decoration: none;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+button,
+input {
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+  list-style-type: none;
+  transition: all 0.2s ease-in-out;
+  &:active,
+  &:hover,
+  &:focus {
+    outline: none;
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input,
+li {
+  list-style-type: none;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1170px;
+}
