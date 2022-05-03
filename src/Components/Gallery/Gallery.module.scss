@@ -5,23 +5,21 @@
     flex: 1;
     margin-bottom: 62px;
 
-    .menu {
-      position: relative;
-      flex: 1;
-      cursor: pointer;
-
-      .gallery__allModels {
-        margin-right: 5px;
-        font-size: 18px;
-      }
-    }
-
-    .layout {
-      .layout8 {
+    .layouts {
+      .layout {
+        cursor: pointer;
         margin-right: 20px;
+        &:last-child {
+          margin-right: 43px;
+        }
       }
-      .layout4 {
-        margin-right: 43px;
+      svg * {
+        fill: #F2F3F5;
+      }
+      .activeLayout {
+        svg * {
+          fill: #000;
+        }
       }
     }
 
@@ -40,6 +38,6 @@
   }
 
   .models {
-
+    flex-wrap: wrap;
   }
 }

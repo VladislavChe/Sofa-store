@@ -6,22 +6,23 @@
     .menu__list {
         li {
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
             &:hover {
-                transition: all 0.2s ease;
+                transition: all 0.2s ease-in-out;
                 color: #FF9619;
             }
         }
         .tel {
+            transition: all 0.2s ease-in-out;
             font-family: 'Open Sans', sans-serif;
         }
         svg * {
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
 
         }
         svg {
             &:hover * {
-                transition: all 0.2s ease;
+                transition: all 0.2s ease-in-out;
                 stroke: #FF9619;
             }
 
@@ -32,9 +33,9 @@
         margin-top: 55px;
         li {
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
             &:hover {
-                transition: all 0.2s ease;
+                transition: all 0.2s ease-in-out;
                 color: #FF9619;
             }
 
