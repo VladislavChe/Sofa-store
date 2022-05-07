@@ -12,7 +12,7 @@ import poufs from '../../img/poufs.png'
 import exclusive from '../../img/exclusive.png'
 import { ReactComponent as Cart } from '../../img/cart.svg'
 
-const Header = () => {
+const Header = ({onClickCart}) => {
   return (
     <header className={styles.header}>
       <nav className={styles.menu}>
@@ -23,7 +23,7 @@ const Header = () => {
           <li><img src={logo} alt="logo" className={styles.logo}/></li>
           <li>О компании</li>
           <li><a href="tel:+74959825364" className={styles.tel}>+7 (495) 982-53-64</a></li>
-          <li><Cart className='logo' width={'30px'} height={'30px'} /></li>
+          <li onClick={onClickCart}><Cart className='logo' width={'30px'} height={'30px'} /></li>
         </ul>
       </nav>
       <ul className={`${styles.furniture} d-flex align-center`}>

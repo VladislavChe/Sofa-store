@@ -37,8 +37,8 @@ const SubMenu = () => {
   }
 
   return (
-    <div className={`${styles.menu} d-flex align-center`} ref={modelsRef}>
-      <div onClick={toggleVisibleSubMenu}>
+    <div className={`${styles.menu} d-flex align-center`}>
+      <div ref={modelsRef} onClick={toggleVisibleSubMenu}>
         <span className={styles.gallery__allModels}>Все {activeName}</span>
         <VectorDown width={'13px'} height={'7.5px'} />
       </div>

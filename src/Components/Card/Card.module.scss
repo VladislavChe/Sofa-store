@@ -1,4 +1,39 @@
 .card {
+  width: 210px;
+  padding: 30px;
+  border: 1px solid #F3F3F3;
+  border-radius: 40px;
+  margin-right: 40px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease-in-out;
+    transform: translateY(-10px);
+  }
+
+  .hurt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #F8F8F8;
+    border-radius: 7px;
+    &.active {
+      background: #FEF0F0;
+    }
+    &:hover {
+      background: #FEF0F0;
+    }
+  }
+
+  .modelImg {
+    width: 133px;
+    height: 112px;
+    margin: 0 auto;
+  }
+
   .wrapper {
     background: red;
     width: 100%;
@@ -9,21 +44,37 @@
     }
   }
 
-  span {
+  .title {
     display: block;
-    margin-top: 23px;
     text-align: center;
     font-weight: 500;
     font-size: 18px;
   }
 
   .price {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 23px;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
 
-    span {
-      display: inline;
+    .priceName {
+      display: block;
+      font-weight: 500;
+      color: #BDBDBD;
+      font-size: 14px;
+      text-transform: uppercase;
     }
+
+    .priceWrap {
+
+      .priceSum {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+      }
+    }
+
   }
 }

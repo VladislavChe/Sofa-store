@@ -9,43 +9,42 @@ import SubMenu from '../SubMenu/SubMenu';
 import { ReactComponent as Layout8 } from '../../img/layout-8.svg'
 import { ReactComponent as Layout4 } from '../../img/layout-4.svg'
 import { ReactComponent as SearchLoop } from '../../img/search-loop.svg'
-import martin from '../../img/models/martin.jpg';
-import alba from '../../img/models/alba.jpg';
+import martin from '../../../src/img/models/martin.png'
+import alba from '../../img/models/alba.png'
 
-const Gallery = () => {
+const Gallery = ({addToCart}) => {
+  const [models, setModels] = React.useState([]);
+  React.useEffect(() => {
+    axios.get('https://6271742d25fed8fcb5e66f8f.mockapi.io/models')
+      .then(function (response) {
+        setModels(response.data)
+      })
+      .catch(function (error) {
+        let models = [
+          {
+            url: martin,
+            title: "Martin",
+            price: 15000
+          },
+          {
+            url: alba,
+            title: "Alba",
+            price: 11000
+          }
+        ]
+        setModels(models)
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, [])
+
   const layouts = [<Layout8 width={'55px'} height={'26px'} />, <Layout4 width={'55px'} height={'26px'} />]
   const [activeLayout, setActiveLayout] = React.useState(0);
-
   const onSelectLayout = (index) => {
     setActiveLayout(index)
   }
-
-  const [modelsArr, setModelsArr] = React.useState([]);
- React.useEffect(() => {
-   async function getUser() {
-     try {
-       const response = await axios.get('https://6271742d25fed8fcb5e66f8f.mockapi.io/models');
-       setModelsArr(response.data)
-     } catch (error) {
-       console.error(error);
-     }
-   }
-   getUser()
-   }, [])
-
-  const modelsArr3 = [
-    {
-      "url": "/img/models/martin.jpg",
-      "title": "Martin",
-      "price": 15000,
-    },
-    {
-      "url": "/img/models/alba.jpg",
-      "title": "Alba",
-      "price": 11000,
-    },
-  ]
-
 
   return (
     <div className={styles.gallery}>
@@ -68,7 +67,7 @@ const Gallery = () => {
         </div>
       </div>
       <div className={`${styles.models} d-flex`}>
-        {modelsArr.map((obj, index) => <Card key={`${obj} ${index}`} url={obj.url} title={obj.title} price={obj.price} /> )}
+        {models.map((obj, index) => <Card index={index} addToCart={addToCart} key={`${obj} ${index}`} url={obj.url} title={obj.title} price={obj.price} /> )}
       </div>
     </div>
   );
