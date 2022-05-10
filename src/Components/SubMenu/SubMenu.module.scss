@@ -2,11 +2,16 @@
   position: relative;
   flex: 1;
   cursor: pointer;
+  z-index: 1;
 
   .gallery__allModels {
     margin-right: 5px;
     font-size: 18px;
     text-transform: none;
+
+    &_search {
+      cursor: auto;
+    }
   }
 
   .subMenu {

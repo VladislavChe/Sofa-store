@@ -24,15 +24,53 @@
     }
 
     .searchInput{
+      position: relative;
+
       input {
         height: 36px;
         width: 270px;
-        padding: 7px 30px 7px 12px;
+        padding: 7px 61px 7px 12px;
+        cursor: text;
       }
       svg {
         position: absolute;
         top: 9px;
         right: 12px;
+      }
+
+      .clear {
+        position: absolute;
+        top: 12.5px;
+        right: 10px;
+        font-size: 10px;
+        color: #BDBDBD;
+        cursor: pointer;
+      }
+
+      .autoCompleteList {
+        position: absolute;
+        top: 35px;
+        left: 0;
+        width: 270px;
+        padding: 12px;
+        background: #fff;
+        border-top: 1px solid #BDBDBD;
+        border-right: 2px solid #BDBDBD;
+        border-bottom: 2px solid #BDBDBD;
+        border-left: 1px solid #BDBDBD;
+
+        li {
+          margin-bottom: 10px;
+          cursor: pointer;
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        .notSearch {
+          font-size: 10px;
+          color: #BDBDBD;
+        }
       }
     }
   }

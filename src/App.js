@@ -4,9 +4,6 @@ import Header from './Components/Header/Header';
 import Gallery from './Components/Gallery/Gallery';
 import Basket from './Components/Basket/Basket';
 
-
-
-
 function App() {
   const [openBasket, setOpenBasket] = React.useState(false);
 
@@ -22,10 +19,6 @@ function App() {
       setBasketItems(prevState => [...prevState, model])
     }
   }
-
-  React.useEffect(() => {
-    // console.log(JSON.stringify([...basketItems]))
-    }, [basketItems])
 
   return (
     <div className='App'>
