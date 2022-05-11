@@ -9,46 +9,8 @@ import SubMenu from '../SubMenu/SubMenu';
 import { ReactComponent as Layout8 } from '../../img/layout-8.svg'
 import { ReactComponent as Layout4 } from '../../img/layout-4.svg'
 import { ReactComponent as SearchLoop } from '../../img/search-loop.svg'
-import martin from '../../../src/img/models/martin.png'
-import alba from '../../img/models/alba.png'
 
-const Gallery = ({addToCart}) => {
-  const [allModels, setAllModels] = React.useState([]);
-  const [models, setModels] = React.useState(allModels);
-
-  //Получение списка всех моделей
-  const getAllModels = () => {
-    axios.get('https://6271742d25fed8fcb5e66f8f.mockapi.io/models')
-      .then(function (response) {
-        setAllModels(response.data)
-        setModels(response.data)
-      })
-      .catch(function (error) {
-        let models = [
-          {
-            url: martin,
-            title: "Martin",
-            description: 'Диваны',
-            price: 15000
-          },
-          {
-            url: alba,
-            title: "Alba",
-            description: 'Кресла',
-            price: 11000
-          }
-        ]
-        setAllModels(models)
-        setModels(models)
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-  }
-  React.useEffect(() => {
-    getAllModels()
-  }, [])
+const Gallery = ({addToCart, allModels, models, setModels}) => {
 
   // Выбор раскладки моделей
   const layouts = [<Layout8 width={'55px'} height={'26px'} />, <Layout4 width={'55px'} height={'26px'} />]
@@ -114,7 +76,7 @@ const Gallery = ({addToCart}) => {
   return (
     <div className={styles.gallery}>
       <div className={`${styles.searchRow} d-flex align-center`}>
-        <SubMenu mainModels={models} allModels={allModels} setModels={setModels} setActiveSubMenuItem={setActiveSubMenuItem} searchValue={searchValue} />
+        <SubMenu allModels={allModels} setModels={setModels} setActiveSubMenuItem={setActiveSubMenuItem} searchValue={searchValue} />
         <div className={`${styles.layouts} d-flex`}>
           {layouts.map((layout, index) => {
             return (

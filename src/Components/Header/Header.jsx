@@ -11,8 +11,73 @@ import mattresses from '../../img/mattresses.png'
 import poufs from '../../img/poufs.png'
 import exclusive from '../../img/exclusive.png'
 import { ReactComponent as Cart } from '../../img/cart.svg'
+import martin from '../../img/models/martin.png';
+import alba from '../../img/models/alba.png';
+import Card from '../Card/Card';
 
-const Header = ({onClickCart}) => {
+const Header = ({onClickCart, allModels, setModels}) => {
+  const headerModels = [
+    {
+      url: sofa,
+      title: "Диваны",
+      description: "Диваны",
+    },
+    {
+      url: armchairs,
+      title: "Кресла",
+      description: "Кресла",
+    },
+    {
+      url: chairs,
+      title: "Стулья",
+      description: "Стулья",
+    },
+    {
+      url: beds,
+      title: "Кровати",
+      description: "Кровати",
+    },
+    {
+      url: mattresses,
+      title: "Матрацы",
+      description: "Матрацы",
+    },
+    {
+      url: poufs,
+      title: "Пуфы",
+      description: "Пуфы",
+    },
+    {
+      url: exclusive,
+      title: "Эксклюзивная мебель",
+      description: "Эксклюзивная мебель",
+    },
+  ]
+
+  //Сортировка из шапки
+  const [activeItem, setActiveItem] = React.useState(false);
+  const [activeIndex, setActiveIndex] = React.useState(false);
+
+  const onClickItem = (obj, index) => {
+    setActiveItem(obj)
+    setActiveIndex(index)
+
+  }
+  React.useEffect(() => {
+    setModels(allModels.filter(item => item.description.toLowerCase().includes(activeItem.title.toLowerCase())))
+  }, [activeItem])
+
+  //Клик вне элемента
+  const itemsRef = React.useRef();
+  React.useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick)
+  }, [])
+  const handleOutsideClick = (e) => {
+    if(!e.path.includes(itemsRef.current)) {
+      setActiveIndex(false)
+    }
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.menu}>
@@ -26,35 +91,13 @@ const Header = ({onClickCart}) => {
           <li onClick={onClickCart}><Cart className='logo' width={'30px'} height={'30px'} /></li>
         </ul>
       </nav>
-      <ul className={`${styles.furniture} d-flex align-center`}>
-        <li>
-          <img src={sofa} alt="sofa"/>
-          <span>Диваны</span>
-        </li>
-        <li>
-          <img src={chairs} alt="chairs"/>
-          <span>Стулья</span>
-        </li>
-        <li>
-          <img src={armchairs} alt="armchairs"/>
-          <span>Кресла</span>
-        </li>
-        <li>
-          <img src={beds} alt="beds"/>
-          <span>Кровати</span>
-        </li>
-        <li>
-          <img src={mattresses} alt="mattresses"/>
-          <span>Матрацы</span>
-        </li>
-        <li>
-          <img src={poufs} alt="poufs"/>
-          <span>пуфы</span>
-        </li>
-        <li>
-          <img src={exclusive} alt="exclusive"/>
-          <span>Эксклюзивная мебель </span>
-        </li>
+      <ul ref={itemsRef} className={`${styles.furniture} d-flex align-center`}>
+        {headerModels.map((obj, index) =>
+          <li className={activeIndex === index ? styles.active : null} onClick={() => onClickItem(obj, index)} key={`${obj} ${index}`}>
+            <img src={obj.url} alt={obj.title}/>
+            <span>{obj.title}</span>
+          </li>
+        )}
       </ul>
     </header>
   );

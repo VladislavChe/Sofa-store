@@ -16,19 +16,21 @@ const Card = ({url, title, price, addToCart, index}) => {
   }
 
   return (
-    <div className={styles.card}>
-      <div onClick={onSelectHurt} className={`${styles.hurt} ${activeHurt? styles.active : null}`}>
-        {activeHurt? <HurtChecked /> : <Hurt />}
-      </div>
-      <img className={styles.modelImg} src={url} alt="Martin-sofa"/>
-      <span className={styles.title}>{title}</span>
-      <div className={styles.price}>
-        <div className={styles.priceWrap}>
-          <span className={styles.priceName}>цена: </span>
-          <span className={styles.priceSum}>{price}<span> руб</span></span>
+    <div className={styles.cardColumn}>
+      <div className={styles.card}>
+        <div onClick={onSelectHurt} className={`${styles.hurt} ${activeHurt? styles.active : null}`}>
+          {activeHurt? <HurtChecked /> : <Hurt />}
         </div>
-        <div onClick={() => addToCart(url, title, price, index)}>
-          <Plus check={true} />
+        <img className={styles.modelImg} src={url} alt="Martin-sofa"/>
+        <span className={styles.title}>{title}</span>
+        <div className={styles.price}>
+          <div className={styles.priceWrap}>
+            <span className={styles.priceName}>цена: </span>
+            <span className={styles.priceSum}>{price}<span> руб</span></span>
+          </div>
+          <div onClick={() => addToCart(url, title, price, index)}>
+            <Plus check={true} />
+          </div>
         </div>
       </div>
     </div>

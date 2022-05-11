@@ -4,7 +4,7 @@ import styles from "./SubMenu.module.scss";
 //pictures
 import { ReactComponent as VectorDown } from '../../img/vector-down.svg'
 
-const SubMenu = ({mainModels, allModels, setModels, searchValue, setActiveSubMenuItem}) => {
+const SubMenu = ({allModels, setModels, searchValue, setActiveSubMenuItem}) => {
   const models = ['Диваны', 'Кресла', 'Стулья', 'Кровати', 'Матрацы', 'Пуфы', 'Эксклюзивная мебель']
 
   const [visibleSubMenu, setVisibleSubMenu] = React.useState(false);
