@@ -1,82 +1,91 @@
 .gallery {
   margin-top: 64px;
+}
 
-  .searchRow {
-    flex: 1;
-    margin-bottom: 62px;
+.searchRow {
+  flex: 1;
+  margin-bottom: 62px;
+}
 
-    .layouts {
-      .layout {
-        cursor: pointer;
-        margin-right: 20px;
-        &:last-child {
-          margin-right: 43px;
-        }
-      }
-      svg * {
-        fill: #F2F3F5;
-      }
-      .activeLayout {
-        svg * {
-          fill: #000;
-        }
-      }
-    }
+.layouts {
+  svg * {
+    fill: #f2f3f5;
+  }
+}
 
-    .searchInput{
-      position: relative;
+.layout {
+  margin-right: 20px;
+  cursor: pointer;
+  &:last-child {
+    margin-right: 43px;
+  }
+}
 
-      input {
-        height: 36px;
-        width: 270px;
-        padding: 7px 61px 7px 12px;
-        cursor: text;
-      }
-      svg {
-        position: absolute;
-        top: 9px;
-        right: 12px;
-      }
+.activeLayout {
+  svg * {
+    fill: #000;
+  }
+}
 
-      .clear {
-        position: absolute;
-        top: 12.5px;
-        right: 10px;
-        font-size: 10px;
-        color: #BDBDBD;
-        cursor: pointer;
-      }
+.searchInput {
+  position: relative;
 
-      .autoCompleteList {
-        position: absolute;
-        top: 35px;
-        left: 0;
-        width: 270px;
-        padding: 12px;
-        background: #fff;
-        border-top: 1px solid #BDBDBD;
-        border-right: 2px solid #BDBDBD;
-        border-bottom: 2px solid #BDBDBD;
-        border-left: 1px solid #BDBDBD;
+  input {
+    height: 36px;
+    width: 270px;
+    padding: 7px 61px 7px 12px;
+    cursor: text;
+  }
+  svg {
+    position: absolute;
+    top: 9px;
+    right: 12px;
+  }
+}
 
-        li {
-          margin-bottom: 10px;
-          cursor: pointer;
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
+.clear {
+  position: absolute;
+  top: 12.5px;
+  right: 10px;
 
-        .notSearch {
-          font-size: 10px;
-          color: #BDBDBD;
-        }
-      }
+  font-size: 10px;
+
+  color: #bdbdbd;
+  cursor: pointer;
+}
+
+.autoCompleteList {
+  position: absolute;
+  top: 35px;
+  left: 0;
+  width: 270px;
+  padding: 12px;
+
+  background: #fff;
+  border-top: 1px solid #bdbdbd;
+  border-right: 2px solid #bdbdbd;
+  border-bottom: 2px solid #bdbdbd;
+  border-left: 1px solid #bdbdbd;
+
+  li {
+    margin-bottom: 10px;
+    cursor: pointer;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
-  .models {
-    flex-wrap: wrap;
-    justify-content: center;
+  .notSearch {
+    font-size: 10px;
+    color: #bdbdbd;
+  }
+}
+
+.models {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  &_two {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

@@ -2,7 +2,7 @@ $mainFont: 'Raleway', sans-serif;
 $OpenSans: 'Open Sans', sans-serif;
 $mainFontSize: 13px;
 $time: all 0.2s ease-in-out;
-$hoverColor: #FF9619;
+$hoverColor: #ff9619;
 
 html,
 body {
@@ -119,4 +119,5 @@ li {
 .container {
   margin: 0 auto;
   max-width: 1170px;
+  padding: 0 15px;
 }

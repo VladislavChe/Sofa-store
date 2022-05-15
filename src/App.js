@@ -4,6 +4,8 @@ import Header from './Components/Header/Header';
 import Gallery from './Components/Gallery/Gallery';
 import Basket from './Components/Basket/Basket';
 import * as axios from 'axios';
+
+// pictures
 import martin from './img/models/martin.png';
 import alba from './img/models/alba.png';
 import toscana from './img/models/toscana.png';
@@ -169,18 +171,21 @@ function App() {
   const addToCart = (url, title, price, index) => {
     let model = {url, title, price, index}
 
+    //Проверка на существующий товар в корзине
     let checkItems = basketItems.some(function(e){
       return e.index == index;
     });
 
     if(!checkItems){
+      axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
       setBasketItems(prevState => [...prevState, model])
     }
+
   }
 
   return (
     <div className='App'>
-      {openBasket && <Basket items={basketItems} onClickCart={() => setOpenBasket(false)} />}
+      {openBasket && <Basket items={basketItems} setBasketItems={setBasketItems} onClickCart={() => setOpenBasket(false)} />}
       <div className="container">
         <Header allModels={allModels} models={models} setModels={setModels} onClickCart={() => setOpenBasket(true)} />
         <Gallery allModels={allModels} models={models} setModels={setModels} addToCart={addToCart} />

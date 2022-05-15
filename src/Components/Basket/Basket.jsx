@@ -1,14 +1,30 @@
-import React from "react";
-import styles from "./Basket.module.scss";
-
+import * as axios from 'axios';
+import React from 'react';
 //pictures
-import { ReactComponent as VectorRight } from '../../img/vector-right.svg'
-import sofa from '../../img/sofa.png'
-import chairs from '../../img/chairs.png'
+import { ReactComponent as VectorRight } from '../../img/vector-right.svg';
 import Plus from '../_Utils/Plus/Plus';
-import Card from '../Card/Card';
+import styles from './Basket.module.scss';
 
-const Basket = ({onClickCart, items}) => {
+const Basket = ({ onClickCart, items, setBasketItems }) => {
+  React.useEffect(() => {
+    axios
+      .get('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart')
+      .then(function (response) {
+        setBasketItems(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
+  }, []);
+
+  const onRemoveItem = (id) => {
+    axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
+    setBasketItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <div className={styles.basket}>
       <div className={styles.line}>
@@ -19,16 +35,18 @@ const Basket = ({onClickCart, items}) => {
           </div>
         </div>
         <div className={styles.list}>
-          {items.map((item, index) =>
+          {items.map((item, index) => (
             <li key={`${item} ${index}`} className={styles.item}>
-              <img className={styles.modelPic} src={item.url} alt="sofa"/>
+              <img className={styles.modelPic} src={item.url} alt="sofa" />
               <div className={styles.wrapper}>
-              <h4>{item.title}</h4>
-              <span>{item.price} руб.</span>
+                <h4>{item.title}</h4>
+                <span>{item.price} руб.</span>
               </div>
-              <Plus check={true} deg45={true} />
-            </li>)}
-
+              <div onClick={() => onRemoveItem(item.id)}>
+                <Plus check={false} deg45={true} />
+              </div>
+            </li>
+          ))}
         </div>
         <div className={styles.counter}>
           <div className={styles.countPrice}>
@@ -47,4 +65,3 @@ const Basket = ({onClickCart, items}) => {
 };
 
 export default Basket;
-

@@ -1,86 +1,140 @@
 .cardColumn {
-  width: 50%;
-  .card {
-    width: 210px;
-    padding: 30px;
-    border: 1px solid #F3F3F3;
-    border-radius: 40px;
-    margin-right: 33px;
-    margin-bottom: 40px;
-    transition: all 0.2s ease-in-out;
-    cursor: pointer;
-    &:hover {
-      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
-      transition: all 0.2s ease-in-out;
-      transform: translateY(-10px);
+  margin: 0 auto 40px auto;
+
+  &_two {
+    margin: 0 0 40px 0;
+
+    &:nth-child(odd) {
+      justify-self: end;
+      margin-right: 33px;
+    }
+    &:nth-child(even) {
+      justify-self: start;
     }
 
-    .hurt {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 32px;
-      height: 32px;
-      border: 1px solid #F8F8F8;
-      border-radius: 7px;
-      &.active {
-        background: #FEF0F0;
-      }
-      &:hover {
-        background: #FEF0F0;
-      }
-    }
-
-    .modelImg {
-      width: 133px;
-      height: 112px;
-      margin: 0 auto;
-    }
-
-    .wrapper {
-      background: red;
+    .card {
       width: 100%;
-      height: 100%;
-      img {
-        width: 270px;
-        height: 278px;
-      }
     }
-
-    .title {
-      display: block;
-      text-align: center;
-      font-weight: 500;
-      font-size: 18px;
-      text-transform: uppercase;
-    }
-
-    .price {
+    .body {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-top: 23px;
-      font-family: 'Open Sans', sans-serif;
-      font-size: 16px;
-
-      .priceName {
-        display: block;
-        font-weight: 500;
-        color: #BDBDBD;
-        font-size: 14px;
-        text-transform: uppercase;
-      }
-
-      .priceWrap {
-
-        .priceSum {
-          font-family: 'Open Sans', sans-serif;
-          font-size: 14px;
-          font-weight: 700;
-        }
-      }
-
+    }
+    .cont {
+      margin-left: 30px;
+      transition: none;
+    }
+    .title {
+      margin-bottom: 10px;
+      text-align: left;
+      transition: none;
+    }
+    .text {
+      display: block;
     }
   }
 }
 
+.card {
+  width: 210px;
+  padding: 30px 15px;
+
+  border: 1px solid #f3f3f3;
+  border-radius: 40px;
+  transition: box-shadow 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
+    transform: translateY(-10px);
+  }
+}
+
+.hurt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #f8f8f8;
+  border-radius: 7px;
+
+  &.active {
+    background: #fef0f0;
+  }
+  &:hover {
+    background: #fef0f0;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.body {
+  width: 100%;
+  transition: none;
+}
+
+.modelImg {
+  width: 133px;
+  height: 112px;
+  margin: 0 auto;
+}
+
+.cont {
+  transition: none;
+}
+
+.title {
+  display: block;
+
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: uppercase;
+
+  transition: none;
+}
+
+.text {
+  display: none;
+
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  line-height: 127.5%;
+}
+
+.price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 23px;
+
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+}
+
+.priceWrap {
+  margin-right: 10px;
+}
+
+.priceName {
+  display: block;
+
+  font-weight: 500;
+  font-size: 14px;
+
+  color: #bdbdbd;
+  text-transform: uppercase;
+}
+
+.priceSum {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}

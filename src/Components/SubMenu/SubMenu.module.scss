@@ -1,84 +1,88 @@
 .menu {
   position: relative;
   flex: 1;
+
   cursor: pointer;
   z-index: 1;
+}
 
-  .gallery__allModels {
-    margin-right: 5px;
-    font-size: 18px;
-    text-transform: none;
+.allModels {
+  margin-right: 5px;
+  font-size: 18px;
+  text-transform: none;
 
-    &_search {
-      cursor: auto;
-    }
+  &_search {
+    cursor: auto;
   }
+}
 
-  .subMenu {
-    position: absolute;
-    top: 50px;
-    left: 20px;
-    width: 213px;
-    padding: 15px;
-    background: #fff;
-    box-shadow: 0px 0px 17px 4px rgba(0,0,0,0.18);
+.subMenu {
+  position: absolute;
+  top: 50px;
+  left: 20px;
+  width: 213px;
+  padding: 15px;
 
+  background: #fff;
+  box-shadow: 0px 0px 17px 4px rgba(0, 0, 0, 0.18);
+}
 
-    .all {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 14px;
-      text-transform: none;
-      cursor: pointer;
-      svg {
-        transform: rotate(180deg);
+.all {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: none;
+
+  cursor: pointer;
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.list {
+  text-transform: none;
+  font-size: 17px;
+
+  li {
+    margin-bottom: 15px;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &.active span {
+      color: #ff9619;
+      &:after {
+        transform: scaleX(1);
       }
     }
+    span {
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      &:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 100%;
 
-    .list {
-      text-transform: none;
-      font-size: 17px;
-      li {
-        cursor: pointer;
-        margin-bottom: 15px;
+        background: #ff9619;
         transition: all 0.2s ease-in-out;
-        &:last-child {
-          margin-bottom: 0;
-        }
-        &.active span {
-          color: #FF9619;
-          &:after{
-            transform: scaleX(1)
-          }
-        }
-        span {
-          position: relative;
-          transition: all 0.2s ease-in-out;
-          &:after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            height: 2px;
-            width: 100%;
-            background: #FF9619;
-            transition: all 0.2s ease-in-out;
-            transform: scaleX(0)
-          }
-        }
-        &:hover span {
-          transition: all 0.2s ease-in-out;
-          color: #FF9619;
-          &:after{
-            transform: scaleX(1)
-          }
-
-        }
+        transform: scaleX(0);
+      }
+    }
+    &:hover span {
+      transition: all 0.2s ease-in-out;
+      color: #ff9619;
+      &:after {
+        transform: scaleX(1);
       }
     }
   }
 }
-

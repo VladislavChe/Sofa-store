@@ -1,24 +1,31 @@
-import React from "react";
-import styles from "./SubMenu.module.scss";
-
+import React from 'react';
 //pictures
-import { ReactComponent as VectorDown } from '../../img/vector-down.svg'
+import { ReactComponent as VectorDown } from '../../img/vector-down.svg';
+import styles from './SubMenu.module.scss';
 
-const SubMenu = ({allModels, setModels, searchValue, setActiveSubMenuItem}) => {
-  const models = ['Диваны', 'Кресла', 'Стулья', 'Кровати', 'Матрацы', 'Пуфы', 'Эксклюзивная мебель']
+const SubMenu = ({ allModels, setModels, searchValue, setActiveSubMenuItem }) => {
+  const models = [
+    'Диваны',
+    'Кресла',
+    'Стулья',
+    'Кровати',
+    'Матрацы',
+    'Пуфы',
+    'Эксклюзивная мебель',
+  ];
 
   const [visibleSubMenu, setVisibleSubMenu] = React.useState(false);
   const toggleVisibleSubMenu = () => {
-    setVisibleSubMenu(!visibleSubMenu)
-  }
+    setVisibleSubMenu(!visibleSubMenu);
+  };
 
-  const modelsRef = React.useRef()
+  const modelsRef = React.useRef();
   React.useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick)
-  }, [])
+    document.body.addEventListener('click', handleOutsideClick);
+  }, []);
   const handleOutsideClick = (e) => {
-    if(!e.path.includes(modelsRef.current)) {
-      setVisibleSubMenu(false)
+    if (!e.path.includes(modelsRef.current)) {
+      setVisibleSubMenu(false);
     }
   };
 
@@ -26,30 +33,32 @@ const SubMenu = ({allModels, setModels, searchValue, setActiveSubMenuItem}) => {
   const [activeName, setActiveName] = React.useState('Товары');
   const onSelectItem = (index, model) => {
     setActiveItem(index);
-    setVisibleSubMenu(!visibleSubMenu)
-    setActiveName(model)
+    setVisibleSubMenu(!visibleSubMenu);
+    setActiveName(model);
 
-    setActiveSubMenuItem(model)
+    setActiveSubMenuItem(model);
   };
 
   const onSelectAll = () => {
-    setVisibleSubMenu(!visibleSubMenu)
-    setActiveName('Товары')
+    setVisibleSubMenu(!visibleSubMenu);
+    setActiveName('Товары');
     setActiveItem(null);
-    setModels(allModels)
-    setActiveSubMenuItem('')
-  }
+    setModels(allModels);
+    setActiveSubMenuItem('');
+  };
 
   return (
     <div className={`${styles.menu} d-flex align-center`}>
-      {searchValue ?
-        <span className={`${styles.gallery__allModels} ${styles.gallery__allModels_search}`}>Поиск по: "{searchValue}"</span> :
-
+      {searchValue ? (
+        <span className={`${styles.allModels} ${styles.allModels_search}`}>
+          Поиск по: "{searchValue}"
+        </span>
+      ) : (
         <div ref={modelsRef} onClick={toggleVisibleSubMenu}>
-          <span className={styles.gallery__allModels}>{`Все ${activeName}`}</span>
+          <span className={styles.allModels}>{`Все ${activeName}`}</span>
           <VectorDown width={'13px'} height={'7.5px'} />
         </div>
-      }
+      )}
 
       {visibleSubMenu && (
         <div className={styles.subMenu}>
@@ -62,9 +71,8 @@ const SubMenu = ({allModels, setModels, searchValue, setActiveSubMenuItem}) => {
               return (
                 <li
                   onClick={() => onSelectItem(index, model)}
-                  className={activeItem === index ? styles.active : ""}
-                  key={`${model} ${index}`}
-                >
+                  className={activeItem === index ? styles.active : ''}
+                  key={`${model} ${index}`}>
                   <span>{model}</span>
                 </li>
               );
@@ -73,9 +81,7 @@ const SubMenu = ({allModels, setModels, searchValue, setActiveSubMenuItem}) => {
         </div>
       )}
     </div>
-
   );
 };
 
 export default SubMenu;
-

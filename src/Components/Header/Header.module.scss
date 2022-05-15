@@ -1,58 +1,57 @@
 .header {
-    margin: 0 auto;
-    padding-top: 25px;
-    font-weight: 600;
-
-    .menu__list {
-        li {
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            &:hover {
-                transition: all 0.2s ease-in-out;
-                color: #FF9619;
-            }
-        }
-        .tel {
-            transition: all 0.2s ease-in-out;
-            font-family: 'Open Sans', sans-serif;
-        }
-        svg * {
-            transition: all 0.2s ease-in-out;
-
-        }
-        svg {
-            &:hover * {
-                transition: all 0.2s ease-in-out;
-                stroke: #FF9619;
-            }
-
-        }
-    }
-
-    .furniture {
-        margin-top: 55px;
-        li {
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            &:hover {
-                transition: all 0.2s ease-in-out;
-                color: #FF9619;
-            }
-
-            img {
-                width: 181px;
-                height: 122px;
-            }
-            span {
-                display: block;
-                margin: 0 auto;
-                text-align: center;
-
-            }
-            &.active {
-                color: #FF9619;
-            }
-        }
-    }
+  margin: 0 auto;
+  padding-top: 25px;
+  font-weight: 600;
 }
 
+.list {
+  li {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transition: all 0.2s ease-in-out;
+      color: #ff9619;
+    }
+  }
+
+  svg * {
+    transition: all 0.2s ease-in-out;
+  }
+  svg {
+    &:hover * {
+      transition: all 0.2s ease-in-out;
+      stroke: #ff9619;
+    }
+  }
+}
+
+.tel {
+  transition: all 0.2s ease-in-out;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.furniture {
+  margin-top: 55px;
+
+  li {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transition: all 0.2s ease-in-out;
+      color: #ff9619;
+    }
+    img {
+      width: 181px;
+      height: 122px;
+    }
+    span {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+}
+
+.active {
+  color: #ff9619;
+}

@@ -1,115 +1,152 @@
-import React from "react";
-import * as axios from "axios";
-import styles from "./Gallery.module.scss";
+import React from 'react';
+import { ReactComponent as Layout4 } from '../../img/layout-4.svg';
+//pictures
+import { ReactComponent as Layout8 } from '../../img/layout-8.svg';
+import { ReactComponent as SearchLoop } from '../../img/search-loop.svg';
 import Card from '../Card/Card';
 import SubMenu from '../SubMenu/SubMenu';
+import styles from './Gallery.module.scss';
 
-
-//pictures
-import { ReactComponent as Layout8 } from '../../img/layout-8.svg'
-import { ReactComponent as Layout4 } from '../../img/layout-4.svg'
-import { ReactComponent as SearchLoop } from '../../img/search-loop.svg'
-
-const Gallery = ({addToCart, allModels, models, setModels}) => {
-
-  // Выбор раскладки моделей
-  const layouts = [<Layout8 width={'55px'} height={'26px'} />, <Layout4 width={'55px'} height={'26px'} />]
-  const [activeLayout, setActiveLayout] = React.useState(0);
-  const onSelectLayout = (index) => {
-    setActiveLayout(index)
-  }
-
+const Gallery = ({ addToCart, allModels, models, setModels }) => {
   //Сортировка из searchInput
   const [searchValue, setSearchValue] = React.useState('');
   const onChangeSearchInput = (event) => {
-    setSearchValue(event.target.value)
-    setVisibleAutoCompleteMenu(true)
+    setSearchValue(event.target.value);
+    setVisibleAutoCompleteMenu(true);
 
-    if(!event.target.value) {
-      setVisibleAutoCompleteMenu(false)
-      setModels(allModels)
+    if (!event.target.value) {
+      setVisibleAutoCompleteMenu(false);
+      setModels(allModels);
     }
-  }
+  };
   React.useEffect(() => {
-    setModels(allModels.filter(item => item.description.toLowerCase().includes(searchValue.toLowerCase())))
-  }, [searchValue])
+    setModels(
+      allModels.filter((item) =>
+        item.description.toLowerCase().includes(searchValue.toLowerCase()),
+      ),
+    );
+  }, [searchValue]);
 
   //Сортировка по фильтру из subMenu
   const [activeSubMenuItem, setActiveSubMenuItem] = React.useState('');
   React.useEffect(() => {
-    setModels(allModels.filter(item => item.description.toLowerCase().includes(activeSubMenuItem.toLowerCase())))
-  }, [activeSubMenuItem])
+    setModels(
+      allModels.filter((item) =>
+        item.description.toLowerCase().includes(activeSubMenuItem.toLowerCase()),
+      ),
+    );
+  }, [activeSubMenuItem]);
 
   //Autocomplete menu
   const [visibleAutoCompleteMenu, setVisibleAutoCompleteMenu] = React.useState(false);
   const clearSearchInput = () => {
-    setSearchValue('')
-    setVisibleAutoCompleteMenu(false)
-    setModels(allModels)
-  }
+    setSearchValue('');
+    setVisibleAutoCompleteMenu(false);
+    setModels(allModels);
+  };
   const autoCompleteMenu = () => {
     const closeAutoCompleteMenu = (text) => {
-      setSearchValue(text)
-      setVisibleAutoCompleteMenu(false)
-    }
+      setSearchValue(text);
+      setVisibleAutoCompleteMenu(false);
+    };
 
-    const onFilterItems = allModels.filter((item) => item.description.toLowerCase().includes(searchValue.toLowerCase()))
+    const onFilterItems = allModels.filter((item) =>
+      item.description.toLowerCase().includes(searchValue.toLowerCase()),
+    );
 
-    if(onFilterItems.length > 0) {
-      return (
-        onFilterItems.map((obj, index) => <li key={`${obj} ${index}`} onClick={() => closeAutoCompleteMenu(obj.description)}><span>{obj.description}</span></li>)
-      )
+    const itemDiscription = onFilterItems.map((item) => item.description);
+
+    const makeUniq = (arr) => {
+      return arr.filter((el, id) => arr.indexOf(el) === id);
+    };
+
+    const removeDublicate = makeUniq(itemDiscription);
+
+    if (onFilterItems.length > 0) {
+      return removeDublicate.map((obj, index) => (
+        <li key={`${obj} ${index}`} onClick={() => closeAutoCompleteMenu(obj.description)}>
+          <span>{obj}</span>
+        </li>
+      ));
     } else {
-      return <span className={styles.notSearch}>ничего не найдено</span>
+      return <span className={styles.notSearch}>ничего не найдено</span>;
     }
-  }
+  };
   const autoCompleteMenuRef = React.useRef();
   React.useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick)
-  }, [])
+    document.body.addEventListener('click', handleOutsideClick);
+  }, []);
   const handleOutsideClick = (e) => {
-    if(!e.path.includes(autoCompleteMenuRef.current)) {
-      setVisibleAutoCompleteMenu(false)
+    if (!e.path.includes(autoCompleteMenuRef.current)) {
+      setVisibleAutoCompleteMenu(false);
     }
+  };
+
+  // Выбор раскладки моделей
+  const layouts = [
+    <Layout8 width={'55px'} height={'26px'} />,
+    <Layout4 width={'55px'} height={'26px'} />,
+  ];
+  const [activeLayout, setActiveLayout] = React.useState(0);
+  const onSelectLayout = (index) => {
+    setActiveLayout(index);
   };
 
   return (
     <div className={styles.gallery}>
       <div className={`${styles.searchRow} d-flex align-center`}>
-        <SubMenu allModels={allModels} setModels={setModels} setActiveSubMenuItem={setActiveSubMenuItem} searchValue={searchValue} />
+        <SubMenu
+          allModels={allModels}
+          setModels={setModels}
+          setActiveSubMenuItem={setActiveSubMenuItem}
+          searchValue={searchValue}
+        />
         <div className={`${styles.layouts} d-flex`}>
           {layouts.map((layout, index) => {
             return (
-              <div onClick={() => onSelectLayout(index)}
-                   className={`${styles.layout} ${activeLayout === index ? styles.activeLayout : ""}`}
-                   key={`${layout} ${index}`}>
+              <div
+                onClick={() => onSelectLayout(index)}
+                className={`${styles.layout} ${activeLayout === index ? styles.activeLayout : ''}`}
+                key={`${layout} ${index}`}>
                 {layout}
               </div>
-            )
+            );
           })}
         </div>
         <div ref={autoCompleteMenuRef} className={`${styles.searchInput} pos-r`}>
-          <input onChange={onChangeSearchInput} value={searchValue} type='text' placeholder='Поиск'/>
-          {searchValue ?
-            <span onClick={clearSearchInput} className={styles.clear}>очистить</span> :
+          <input
+            onChange={onChangeSearchInput}
+            value={searchValue}
+            type="text"
+            placeholder="Поиск"
+          />
+          {searchValue ? (
+            <span onClick={clearSearchInput} className={styles.clear}>
+              очистить
+            </span>
+          ) : (
             <SearchLoop width={'19px'} height={'19px'} />
-          }
-          {visibleAutoCompleteMenu ?
-            <ul className={styles.autoCompleteList}>
-              {searchValue ?
-                autoCompleteMenu() :
-                null
-              }
-            </ul> :
-            null}
+          )}
+          {visibleAutoCompleteMenu ? (
+            <ul className={styles.autoCompleteList}>{searchValue ? autoCompleteMenu() : null}</ul>
+          ) : null}
         </div>
       </div>
-      <div className={`${styles.models} d-flex`}>
-        {models.map((obj, index) => <Card index={index} addToCart={addToCart} key={`${obj} ${index}`} url={obj.url} title={obj.title} price={obj.price} />)}
+      <div className={`${styles.models} ${activeLayout === 1 ? styles.models_two : ''}`}>
+        {models.map((obj, index) => (
+          <Card
+            index={index}
+            activeLayout={activeLayout}
+            addToCart={addToCart}
+            key={`${obj} ${index}`}
+            url={obj.url}
+            title={obj.title}
+            price={obj.price}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
 export default Gallery;
-
