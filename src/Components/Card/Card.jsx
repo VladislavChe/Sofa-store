@@ -4,14 +4,21 @@ import { ReactComponent as Hurt } from '../../img/hurt.svg';
 import Plus from '../_Utils/Plus/Plus';
 import styles from './Card.module.scss';
 
-const Card = ({ url, title, price, addToCart, index, activeLayout }) => {
+const Card = ({ url, title, price, addToCart, index, activeLayout, activePlus, setActivePlus }) => {
   const [activeHurt, setActiveHurt] = React.useState(false);
+
   const onSelectHurt = () => {
     if (activeHurt) {
       setActiveHurt(false);
     } else {
       setActiveHurt(true);
     }
+  };
+
+  const clickOnPlus = () => {
+    addToCart(url, title, price, index);
+
+    setActivePlus((prevState) => [...prevState, index]);
   };
 
   return (
@@ -41,8 +48,8 @@ const Card = ({ url, title, price, addToCart, index, activeLayout }) => {
               <span> руб</span>
             </span>
           </div>
-          <div onClick={() => addToCart(url, title, price, index)}>
-            <Plus check={true} />
+          <div onClick={clickOnPlus}>
+            <Plus check={activePlus.includes(index) ? true : false} />
           </div>
         </div>
       </div>

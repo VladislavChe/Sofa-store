@@ -1,194 +1,214 @@
-import React from 'react';
-import 'macro-css'
-import Header from './Components/Header/Header';
-import Gallery from './Components/Gallery/Gallery';
-import Basket from './Components/Basket/Basket';
 import * as axios from 'axios';
-
-// pictures
-import martin from './img/models/martin.png';
+import 'macro-css';
+import React from 'react';
+import Basket from './Components/Basket/Basket';
+import Gallery from './Components/Gallery/Gallery';
+import Header from './Components/Header/Header';
 import alba from './img/models/alba.png';
-import toscana from './img/models/toscana.png';
-import leonardo from './img/models/leonardo.png';
-import boorbon from './img/models/boorbon.png';
-import emilio from './img/models/emilio.png';
-import nensi from './img/models/nensi.png';
-import tatami from './img/models/tatami.png';
-import regina from './img/models/regina.png';
-import malta from './img/models/malta.png';
-import versal from './img/models/versal.png';
-import exclusive1 from './img/models/exclusive1.png';
-import floret from './img/models/floret.png';
-import exlusivebed2 from './img/models/exlusivebed2.png';
 import arni from './img/models/arni.png';
-import taiti from './img/models/taiti.png';
+import boorbon from './img/models/boorbon.png';
 import chair1 from './img/models/chair1.png';
 import chair2 from './img/models/chair2.png';
+import emilio from './img/models/emilio.png';
+import exclusive1 from './img/models/exclusive1.png';
 import exclusive3 from './img/models/exclusive3.png';
+import exlusivebed2 from './img/models/exlusivebed2.png';
+import floret from './img/models/floret.png';
+import leonardo from './img/models/leonardo.png';
+import malta from './img/models/malta.png';
+// pictures
+import martin from './img/models/martin.png';
+import nensi from './img/models/nensi.png';
+import regina from './img/models/regina.png';
+import taiti from './img/models/taiti.png';
+import tatami from './img/models/tatami.png';
+import toscana from './img/models/toscana.png';
+import versal from './img/models/versal.png';
 
 function App() {
   const [allModels, setAllModels] = React.useState([]);
   const [models, setModels] = React.useState(allModels);
+  const [activePlus, setActivePlus] = React.useState([]);
 
   const getAllModels = () => {
-    axios.get('https://6271742d25fed8fcb5e66f8f.mockapi.io/models')
+    axios
+      .get('https://6271742d25fed8fcb5e66f8f.mockapi.io/models')
       .then(function (response) {
-        setAllModels(response.data)
-        setModels(response.data)
+        setAllModels(response.data);
+        setModels(response.data);
       })
       .catch(function (error) {
         let models = [
           {
             url: martin,
-            title: "Martin",
+            title: 'Martin',
             description: 'Диваны',
-            price: 15000
+            price: 15000,
           },
           {
             url: alba,
-            title: "Alba",
+            title: 'Alba',
             description: 'Кресла',
-            price: 11000
+            price: 11000,
           },
           {
             url: toscana,
-            title: "Toscana",
+            title: 'Toscana',
             description: 'Кресла',
-            price: 10500
+            price: 10500,
           },
           {
             url: leonardo,
-            title: "Leonardo",
+            title: 'Leonardo',
             description: 'Диваны',
-            price: 12000
+            price: 12000,
           },
           {
             url: boorbon,
-            title: "Boorbon",
+            title: 'Boorbon',
             description: 'Диваны',
-            price: 17000
+            price: 17000,
           },
           {
             url: emilio,
-            title: "emilio",
+            title: 'emilio',
             description: 'Диваны',
-            price: 7000
+            price: 7000,
           },
           {
             url: nensi,
-            title: "nensi",
+            title: 'nensi',
             description: 'Кровати',
-            price: 13000
+            price: 13000,
           },
           {
             url: tatami,
-            title: "tatami",
+            title: 'tatami',
             description: 'Диваны',
-            price: 14000
+            price: 14000,
           },
           {
             url: regina,
-            title: "regina",
+            title: 'regina',
             description: 'Диваны',
-            price: 16000
+            price: 16000,
           },
           {
             url: malta,
-            title: "malta",
+            title: 'malta',
             description: 'Матрацы',
-            price: 5000
+            price: 5000,
           },
           {
             url: versal,
-            title: "versal",
+            title: 'versal',
             description: 'Пуфы',
-            price: 4000
+            price: 4000,
           },
           {
             url: exclusive1,
-            title: "exclusive 1",
+            title: 'exclusive 1',
             description: 'Эксклюзивная мебель',
-            price: 24000
+            price: 24000,
           },
           {
             url: floret,
-            title: "floret",
+            title: 'floret',
             description: 'Кресла',
-            price: 8000
+            price: 8000,
           },
           {
             url: exlusivebed2,
-            title: "exlusive bed 2",
+            title: 'exlusive bed 2',
             description: 'Кровати Эксклюзивная мебель',
-            price: 18000
+            price: 18000,
           },
           {
             url: arni,
-            title: "arni",
+            title: 'arni',
             description: 'Диваны',
-            price: 9000
+            price: 9000,
           },
           {
             url: taiti,
-            title: "taiti",
+            title: 'taiti',
             description: 'Матрацы',
-            price: 8000
+            price: 8000,
           },
           {
             url: chair1,
-            title: "chair 1",
+            title: 'chair 1',
             description: 'Стулья',
-            price: 6000
+            price: 6000,
           },
           {
             url: chair2,
-            title: "chair 2",
+            title: 'chair 2',
             description: 'Стулья',
-            price: 8000
+            price: 8000,
           },
           {
             url: exclusive3,
-            title: "exclusive 3",
+            title: 'exclusive 3',
             description: 'Стулья Эксклюзивная мебель',
-            price: 12000
+            price: 12000,
           },
-        ]
-        setAllModels(models)
-        setModels(models)
+        ];
+        setAllModels(models);
+        setModels(models);
         console.log(error);
       })
       .then(function () {
         // always executed
       });
-  }
+  };
   React.useEffect(() => {
-    getAllModels()
-  }, [])
+    getAllModels();
+  }, []);
 
   //Корзина
   const [openBasket, setOpenBasket] = React.useState(false);
   const [basketItems, setBasketItems] = React.useState([]);
   const addToCart = (url, title, price, index) => {
-    let model = {url, title, price, index}
+    let model = { url, title, price, index };
 
     //Проверка на существующий товар в корзине
-    let checkItems = basketItems.some(function(e){
+    let checkItems = basketItems.some(function (e) {
       return e.index == index;
     });
 
-    if(!checkItems){
+    if (!checkItems) {
       axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
-      setBasketItems(prevState => [...prevState, model])
+      setBasketItems((prevState) => [...prevState, model]);
     }
-
-  }
+  };
 
   return (
-    <div className='App'>
-      {openBasket && <Basket items={basketItems} setBasketItems={setBasketItems} onClickCart={() => setOpenBasket(false)} />}
+    <div className="App">
+      {openBasket && (
+        <Basket
+          items={basketItems}
+          setBasketItems={setBasketItems}
+          activePlus={activePlus}
+          setActivePlus={setActivePlus}
+          onClickCart={() => setOpenBasket(false)}
+        />
+      )}
       <div className="container">
-        <Header allModels={allModels} models={models} setModels={setModels} onClickCart={() => setOpenBasket(true)} />
-        <Gallery allModels={allModels} models={models} setModels={setModels} addToCart={addToCart} />
+        <Header
+          allModels={allModels}
+          models={models}
+          setModels={setModels}
+          onClickCart={() => setOpenBasket(true)}
+        />
+        <Gallery
+          allModels={allModels}
+          models={models}
+          setModels={setModels}
+          addToCart={addToCart}
+          activePlus={activePlus}
+          setActivePlus={setActivePlus}
+        />
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import Card from '../Card/Card';
 import SubMenu from '../SubMenu/SubMenu';
 import styles from './Gallery.module.scss';
 
-const Gallery = ({ addToCart, allModels, models, setModels }) => {
+const Gallery = ({ addToCart, allModels, models, setModels, activePlus, setActivePlus }) => {
   //Сортировка из searchInput
   const [searchValue, setSearchValue] = React.useState('');
   const onChangeSearchInput = (event) => {
@@ -64,7 +64,7 @@ const Gallery = ({ addToCart, allModels, models, setModels }) => {
 
     if (onFilterItems.length > 0) {
       return removeDublicate.map((obj, index) => (
-        <li key={`${obj} ${index}`} onClick={() => closeAutoCompleteMenu(obj.description)}>
+        <li key={`${obj} ${index}`} onClick={() => closeAutoCompleteMenu(obj)}>
           <span>{obj}</span>
         </li>
       ));
@@ -137,6 +137,8 @@ const Gallery = ({ addToCart, allModels, models, setModels }) => {
           <Card
             index={index}
             activeLayout={activeLayout}
+            activePlus={activePlus}
+            setActivePlus={setActivePlus}
             addToCart={addToCart}
             key={`${obj} ${index}`}
             url={obj.url}
