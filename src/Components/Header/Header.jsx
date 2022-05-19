@@ -4,7 +4,7 @@ import beds from '../../img/beds.png';
 import { ReactComponent as Cart } from '../../img/cart.svg';
 import chairs from '../../img/chairs.png';
 import exclusive from '../../img/exclusive.png';
-//pictures
+import { ReactComponent as Hurt } from '../../img/hurt.svg';
 import logo from '../../img/logo.png';
 import mattresses from '../../img/mattresses.png';
 import poufs from '../../img/poufs.png';
@@ -59,11 +59,13 @@ const Header = ({ onClickCart, allModels, setModels }) => {
     setActiveIndex(index);
   };
   React.useEffect(() => {
-    setModels(
-      allModels.filter((item) =>
-        item.description.toLowerCase().includes(activeItem.title.toLowerCase()),
-      ),
-    );
+    if (activeItem) {
+      setModels(
+        allModels.filter((item) =>
+          item.description.toLowerCase().includes(activeItem.title.toLowerCase()),
+        ),
+      );
+    }
   }, [activeItem]);
 
   //Клик вне элемента
@@ -81,20 +83,16 @@ const Header = ({ onClickCart, allModels, setModels }) => {
     <header className={styles.header}>
       <nav className={styles.menu}>
         <ul className={`justify-between align-center d-flex ${styles.list}`}>
-          <li>Каталог</li>
-          <li>Индивидуальная мебель</li>
-          <li>Контакты</li>
           <li>
             <img src={logo} alt="logo" className={styles.logo} />
           </li>
-          <li>О компании</li>
-          <li>
-            <a href="tel:+74959825364" className={styles.tel}>
-              +7 (495) 982-53-64
-            </a>
-          </li>
-          <li onClick={onClickCart}>
-            <Cart width={'30px'} height={'30px'} />
+          <li className={`d-flex align-center ${styles.added}`}>
+            <Hurt width={'20px'} height={'20px'} />
+            <div onClick={onClickCart} className={styles.summ}>
+              <span>1758 руб.</span>
+              <Cart width={'30px'} height={'30px'} />
+              <div className={styles.gold}></div>
+            </div>
           </li>
         </ul>
       </nav>

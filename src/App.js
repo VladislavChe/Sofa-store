@@ -29,6 +29,7 @@ function App() {
   const [allModels, setAllModels] = React.useState([]);
   const [models, setModels] = React.useState(allModels);
   const [activePlus, setActivePlus] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   const getAllModels = () => {
     axios
@@ -36,6 +37,7 @@ function App() {
       .then(function (response) {
         setAllModels(response.data);
         setModels(response.data);
+        setLoading(false);
       })
       .catch(function (error) {
         let models = [
@@ -163,6 +165,7 @@ function App() {
       });
   };
   React.useEffect(() => {
+    setLoading(true);
     getAllModels();
   }, []);
 
@@ -195,12 +198,14 @@ function App() {
         />
       )}
       <div className="container">
-        <Header
-          allModels={allModels}
-          models={models}
-          setModels={setModels}
-          onClickCart={() => setOpenBasket(true)}
-        />
+        {!loading && (
+          <Header
+            allModels={allModels}
+            models={models}
+            setModels={setModels}
+            onClickCart={() => setOpenBasket(true)}
+          />
+        )}
         <Gallery
           allModels={allModels}
           models={models}

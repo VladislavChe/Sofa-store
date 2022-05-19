@@ -59,7 +59,7 @@
   width: 32px;
   height: 32px;
 
-  border: 1px solid #f8f8f8;
+  border: 1px solid #ececec;
   border-radius: 7px;
 
   &.active {
@@ -67,6 +67,15 @@
   }
   &:hover {
     background: #fef0f0;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    & * {
+      stroke: #ececec;
+    }
   }
 }
 

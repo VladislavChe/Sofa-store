@@ -11,16 +11,13 @@
     &:hover {
       transition: all 0.2s ease-in-out;
       color: #ff9619;
-    }
-  }
 
-  svg * {
-    transition: all 0.2s ease-in-out;
-  }
-  svg {
-    &:hover * {
-      transition: all 0.2s ease-in-out;
-      stroke: #ff9619;
+      span {
+        color: #000;
+      }
+    }
+    svg * {
+      transition: all 0.55s ease-in-out;
     }
   }
 }
@@ -28,6 +25,30 @@
 .tel {
   transition: all 0.2s ease-in-out;
   font-family: 'Open Sans', sans-serif;
+}
+
+.added {
+  position: relative;
+
+  span {
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.2s ease-in-out;
+  }
+
+  svg:first-child {
+    margin-right: 20px;
+  }
+}
+
+.gold {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+  background: #ff9619;
 }
 
 .furniture {

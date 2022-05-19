@@ -8,11 +8,7 @@ const Card = ({ url, title, price, addToCart, index, activeLayout, activePlus, s
   const [activeHurt, setActiveHurt] = React.useState(false);
 
   const onSelectHurt = () => {
-    if (activeHurt) {
-      setActiveHurt(false);
-    } else {
-      setActiveHurt(true);
-    }
+    setActiveHurt(!activeHurt);
   };
 
   const clickOnPlus = () => {
