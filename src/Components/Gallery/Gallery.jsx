@@ -19,6 +19,7 @@ const Gallery = ({
   deleteBasketItems,
   basketItems,
   setFavouriteModels,
+  favouriteModels,
 }) => {
   //Сортировка из searchInput
   const [searchValue, setSearchValue] = React.useState('');
@@ -161,6 +162,7 @@ const Gallery = ({
             deleteBasketItems={deleteBasketItems}
             basketItems={basketItems}
             setFavouriteModels={setFavouriteModels}
+            favouriteModels={favouriteModels}
           />
         ))}
       </div>

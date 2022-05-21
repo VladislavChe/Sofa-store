@@ -21,8 +21,8 @@ const Basket = (props) => {
       });
   }, []);
 
-  const onRemoveItem = (id, index) => {
-    props.deleteBasketItems(id, index);
+  const onRemoveItem = (index, id) => {
+    props.deleteBasketItems(index, id);
   };
 
   return (
@@ -44,7 +44,7 @@ const Basket = (props) => {
                     <h4>{item.title}</h4>
                     <span>{item.price} руб.</span>
                   </div>
-                  <div onClick={() => onRemoveItem(item.id, item.index)}>
+                  <div onClick={() => onRemoveItem(item.index, item.id)}>
                     <Plus check={false} deg45={true} />
                   </div>
                 </li>

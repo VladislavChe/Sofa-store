@@ -164,6 +164,7 @@ function App() {
         ];
         setAllModels(models);
         setModels(models);
+        setLoading(false);
         console.log(error);
       })
       .then(function () {
@@ -181,21 +182,29 @@ function App() {
   const addToCart = (url, title, price, index) => {
     let model = { url, title, price, index };
 
-    //Проверка на существующий товар в корзине
-    let checkItems = basketItems.some(function (e) {
-      return e.index == index;
-    });
+    axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
+    setBasketItems((prevState) => [...prevState, model]);
 
-    if (!checkItems) {
-      axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
-      setBasketItems((prevState) => [...prevState, model]);
-    }
+    // //Проверка на существующий товар в корзине
+    // let checkItems = basketItems.some(function (e) {
+    //   return e.index == index;
+    // });
+
+    // if (!checkItems) {
+    //   axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
+    //   setBasketItems((prevState) => [...prevState, model]);
+    // }
   };
 
-  const deleteBasketItems = (id, index) => {
-    axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
-    setBasketItems((prev) => prev.filter((item) => item.id !== id));
-    setActivePlus((prev) => prev.filter((item) => item !== index));
+  const deleteBasketItems = (index, id) => {
+    if (id === undefined) {
+      setBasketItems((prev) => prev.filter((item) => item.index !== index));
+      setActivePlus((prev) => prev.filter((item) => item !== index));
+    } else {
+      axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
+      setBasketItems((prev) => prev.filter((item) => item.index !== index));
+      setActivePlus((prev) => prev.filter((item) => item !== index));
+    }
   };
 
   return (
@@ -238,6 +247,7 @@ function App() {
                   deleteBasketItems={deleteBasketItems}
                   basketItems={basketItems}
                   setFavouriteModels={setFavouriteModels}
+                  favouriteModels={favouriteModels}
                 />
               }
             />
@@ -256,6 +266,7 @@ function App() {
                   deleteBasketItems={deleteBasketItems}
                   basketItems={basketItems}
                   setFavouriteModels={setFavouriteModels}
+                  favouriteModels={favouriteModels}
                 />
               }
             />

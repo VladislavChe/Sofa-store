@@ -15,6 +15,7 @@ const Favourite = ({
   deleteBasketItems,
   basketItems,
   setFavouriteModels,
+  models,
 }) => {
   React.useEffect(() => {
     setShowHeaderModels(false);
@@ -39,13 +40,15 @@ const Favourite = ({
             setActivePlus={setActivePlus}
             addToCart={addToCart}
             key={`${obj} ${index}`}
-            index={index}
+            index={obj.index}
             url={obj.url}
             title={obj.title}
             price={obj.price}
             deleteBasketItems={deleteBasketItems}
             basketItems={basketItems}
             setFavouriteModels={setFavouriteModels}
+            favouriteModels={favouriteModels}
+            models={models}
           />
         ))}
       </ul>

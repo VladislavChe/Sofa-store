@@ -20,14 +20,13 @@ const Card = ({
   setFavouriteModels,
 }) => {
   const onSelectHurt = () => {
+    let favObj = { url, title, price, index };
+
     if (activeHurt.includes(index)) {
       setActiveHurt((prev) => prev.filter((item) => item !== index));
       setFavouriteModels((prev) => prev.filter((item) => item.index !== index));
     } else {
-      let favObj = { url, title, price, index };
-
       setActiveHurt((prevState) => [...prevState, index]);
-
       setFavouriteModels((prevState) => [...prevState, favObj]);
     }
   };
@@ -36,8 +35,8 @@ const Card = ({
     if (activePlus.includes(index)) {
       setActivePlus((prev) => prev.filter((item) => item !== index));
 
-      basketItems.map((obj, index) => {
-        return deleteBasketItems(obj.id, index);
+      basketItems.map((obj) => {
+        return deleteBasketItems(obj.index, obj.id);
       });
     } else {
       addToCart(url, title, price, index);
