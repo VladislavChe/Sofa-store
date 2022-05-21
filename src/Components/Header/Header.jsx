@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import armchairs from '../../img/armchairs.png';
 import beds from '../../img/beds.png';
 import { ReactComponent as Cart } from '../../img/cart.svg';
@@ -11,7 +12,7 @@ import poufs from '../../img/poufs.png';
 import sofa from '../../img/sofa.png';
 import styles from './Header.module.scss';
 
-const Header = ({ onClickCart, allModels, setModels }) => {
+const Header = ({ onClickCart, allModels, setModels, showHeaderModels }) => {
   const headerModels = [
     {
       url: sofa,
@@ -84,10 +85,14 @@ const Header = ({ onClickCart, allModels, setModels }) => {
       <nav className={styles.menu}>
         <ul className={`justify-between align-center d-flex ${styles.list}`}>
           <li>
-            <img src={logo} alt="logo" className={styles.logo} />
+            <NavLink to={'/galery'}>
+              <img src={logo} alt="logo" className={styles.logo} />
+            </NavLink>
           </li>
           <li className={`d-flex align-center ${styles.added}`}>
-            <Hurt width={'20px'} height={'20px'} />
+            <NavLink to={'/favourite'}>
+              <Hurt width={'20px'} height={'20px'} />
+            </NavLink>
             <div onClick={onClickCart} className={styles.summ}>
               <span>1758 руб.</span>
               <Cart width={'30px'} height={'30px'} />
@@ -96,17 +101,19 @@ const Header = ({ onClickCart, allModels, setModels }) => {
           </li>
         </ul>
       </nav>
-      <ul ref={itemsRef} className={`${styles.furniture} d-flex align-center`}>
-        {headerModels.map((obj, index) => (
-          <li
-            className={activeIndex === index ? styles.active : null}
-            onClick={() => onClickItem(obj, index)}
-            key={`${obj} ${index}`}>
-            <img src={obj.url} alt={obj.title} />
-            <span>{obj.title}</span>
-          </li>
-        ))}
-      </ul>
+      {showHeaderModels && (
+        <ul ref={itemsRef} className={`${styles.furniture} d-flex align-center`}>
+          {headerModels.map((obj, index) => (
+            <li
+              className={activeIndex === index ? styles.active : null}
+              onClick={() => onClickItem(obj, index)}
+              key={`${obj} ${index}`}>
+              <img src={obj.url} alt={obj.title} />
+              <span>{obj.title}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </header>
   );
 };

@@ -22,9 +22,7 @@ const Basket = (props) => {
   }, []);
 
   const onRemoveItem = (id, index) => {
-    axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
-    props.setBasketItems((prev) => prev.filter((item) => item.id !== id));
-    props.setActivePlus((prev) => prev.filter((item) => item !== index));
+    props.deleteBasketItems(id, index);
   };
 
   return (

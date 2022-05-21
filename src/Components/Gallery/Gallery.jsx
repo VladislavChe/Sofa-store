@@ -7,7 +7,19 @@ import Card from '../Card/Card';
 import SubMenu from '../SubMenu/SubMenu';
 import styles from './Gallery.module.scss';
 
-const Gallery = ({ addToCart, allModels, models, setModels, activePlus, setActivePlus }) => {
+const Gallery = ({
+  activeHurt,
+  setActiveHurt,
+  addToCart,
+  allModels,
+  models,
+  setModels,
+  activePlus,
+  setActivePlus,
+  deleteBasketItems,
+  basketItems,
+  setFavouriteModels,
+}) => {
   //Сортировка из searchInput
   const [searchValue, setSearchValue] = React.useState('');
   const onChangeSearchInput = (event) => {
@@ -135,15 +147,20 @@ const Gallery = ({ addToCart, allModels, models, setModels, activePlus, setActiv
       <div className={`${styles.models} ${activeLayout === 1 ? styles.models_two : ''}`}>
         {models.map((obj, index) => (
           <Card
-            index={index}
             activeLayout={activeLayout}
             activePlus={activePlus}
             setActivePlus={setActivePlus}
+            activeHurt={activeHurt}
+            setActiveHurt={setActiveHurt}
             addToCart={addToCart}
             key={`${obj} ${index}`}
+            index={index}
             url={obj.url}
             title={obj.title}
             price={obj.price}
+            deleteBasketItems={deleteBasketItems}
+            basketItems={basketItems}
+            setFavouriteModels={setFavouriteModels}
           />
         ))}
       </div>

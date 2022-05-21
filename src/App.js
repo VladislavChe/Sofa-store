@@ -1,7 +1,10 @@
 import * as axios from 'axios';
 import 'macro-css';
 import React from 'react';
+import { Route, Routes } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import Basket from './Components/Basket/Basket';
+import Favourite from './Components/Favourite/Favourite';
 import Gallery from './Components/Gallery/Gallery';
 import Header from './Components/Header/Header';
 import alba from './img/models/alba.png';
@@ -16,7 +19,6 @@ import exlusivebed2 from './img/models/exlusivebed2.png';
 import floret from './img/models/floret.png';
 import leonardo from './img/models/leonardo.png';
 import malta from './img/models/malta.png';
-// pictures
 import martin from './img/models/martin.png';
 import nensi from './img/models/nensi.png';
 import regina from './img/models/regina.png';
@@ -28,8 +30,12 @@ import versal from './img/models/versal.png';
 function App() {
   const [allModels, setAllModels] = React.useState([]);
   const [models, setModels] = React.useState(allModels);
+  const [favouriteModels, setFavouriteModels] = React.useState([]);
+
   const [activePlus, setActivePlus] = React.useState([]);
+  const [activeHurt, setActiveHurt] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
+  const [showHeaderModels, setShowHeaderModels] = React.useState(true);
 
   const getAllModels = () => {
     axios
@@ -186,36 +192,95 @@ function App() {
     }
   };
 
+  const deleteBasketItems = (id, index) => {
+    axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
+    setBasketItems((prev) => prev.filter((item) => item.id !== id));
+    setActivePlus((prev) => prev.filter((item) => item !== index));
+  };
+
   return (
-    <div className="App">
-      {openBasket && (
-        <Basket
-          items={basketItems}
-          setBasketItems={setBasketItems}
-          activePlus={activePlus}
-          setActivePlus={setActivePlus}
-          onClickCart={() => setOpenBasket(false)}
-        />
-      )}
-      <div className="container">
-        {!loading && (
-          <Header
-            allModels={allModels}
-            models={models}
-            setModels={setModels}
-            onClickCart={() => setOpenBasket(true)}
+    <BrowserRouter>
+      <div className="App">
+        {openBasket && (
+          <Basket
+            items={basketItems}
+            setBasketItems={setBasketItems}
+            activePlus={activePlus}
+            setActivePlus={setActivePlus}
+            onClickCart={() => setOpenBasket(false)}
+            deleteBasketItems={deleteBasketItems}
           />
         )}
-        <Gallery
-          allModels={allModels}
-          models={models}
-          setModels={setModels}
-          addToCart={addToCart}
-          activePlus={activePlus}
-          setActivePlus={setActivePlus}
-        />
+        <div className="container">
+          {!loading && (
+            <Header
+              allModels={allModels}
+              models={models}
+              setModels={setModels}
+              onClickCart={() => setOpenBasket(true)}
+              showHeaderModels={showHeaderModels}
+            />
+          )}
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <Gallery
+                  allModels={allModels}
+                  models={models}
+                  setModels={setModels}
+                  addToCart={addToCart}
+                  activePlus={activePlus}
+                  setActivePlus={setActivePlus}
+                  activeHurt={activeHurt}
+                  setActiveHurt={setActiveHurt}
+                  deleteBasketItems={deleteBasketItems}
+                  basketItems={basketItems}
+                  setFavouriteModels={setFavouriteModels}
+                />
+              }
+            />
+            <Route
+              path="galery"
+              element={
+                <Gallery
+                  allModels={allModels}
+                  models={models}
+                  setModels={setModels}
+                  addToCart={addToCart}
+                  activePlus={activePlus}
+                  setActivePlus={setActivePlus}
+                  activeHurt={activeHurt}
+                  setActiveHurt={setActiveHurt}
+                  deleteBasketItems={deleteBasketItems}
+                  basketItems={basketItems}
+                  setFavouriteModels={setFavouriteModels}
+                />
+              }
+            />
+            <Route
+              path="favourite"
+              element={
+                <Favourite
+                  setShowHeaderModels={setShowHeaderModels}
+                  allModels={allModels}
+                  models={models}
+                  setModels={setModels}
+                  addToCart={addToCart}
+                  activePlus={activePlus}
+                  setActivePlus={setActivePlus}
+                  activeHurt={activeHurt}
+                  setActiveHurt={setActiveHurt}
+                  favouriteModels={favouriteModels}
+                  setFavouriteModels={setFavouriteModels}
+                />
+              }
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

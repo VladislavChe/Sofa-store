@@ -4,24 +4,55 @@ import { ReactComponent as Hurt } from '../../img/hurt.svg';
 import Plus from '../_Utils/Plus/Plus';
 import styles from './Card.module.scss';
 
-const Card = ({ url, title, price, addToCart, index, activeLayout, activePlus, setActivePlus }) => {
-  const [activeHurt, setActiveHurt] = React.useState(false);
-
+const Card = ({
+  url,
+  title,
+  price,
+  addToCart,
+  index,
+  activeLayout,
+  activePlus,
+  setActivePlus,
+  activeHurt,
+  setActiveHurt,
+  deleteBasketItems,
+  basketItems,
+  setFavouriteModels,
+}) => {
   const onSelectHurt = () => {
-    setActiveHurt(!activeHurt);
+    if (activeHurt.includes(index)) {
+      setActiveHurt((prev) => prev.filter((item) => item !== index));
+      setFavouriteModels((prev) => prev.filter((item) => item.index !== index));
+    } else {
+      let favObj = { url, title, price, index };
+
+      setActiveHurt((prevState) => [...prevState, index]);
+
+      setFavouriteModels((prevState) => [...prevState, favObj]);
+    }
   };
 
   const clickOnPlus = () => {
-    addToCart(url, title, price, index);
+    if (activePlus.includes(index)) {
+      setActivePlus((prev) => prev.filter((item) => item !== index));
 
-    setActivePlus((prevState) => [...prevState, index]);
+      basketItems.map((obj, index) => {
+        return deleteBasketItems(obj.id, index);
+      });
+    } else {
+      addToCart(url, title, price, index);
+
+      setActivePlus((prevState) => [...prevState, index]);
+    }
   };
 
   return (
     <div className={`${styles.cardColumn} ${activeLayout === 1 ? styles.cardColumn_two : ''}`}>
       <div className={styles.card}>
-        <div onClick={onSelectHurt} className={`${styles.hurt} ${activeHurt ? styles.active : ''}`}>
-          {activeHurt ? <HurtChecked /> : <Hurt />}
+        <div
+          onClick={onSelectHurt}
+          className={`${styles.hurt} ${activeHurt.includes(index) ? styles.active : ''}`}>
+          {activeHurt.includes(index) ? <HurtChecked /> : <Hurt />}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.body}>
