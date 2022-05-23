@@ -197,14 +197,9 @@ function App() {
   };
 
   const deleteBasketItems = (index, id) => {
-    if (id === undefined) {
-      setBasketItems((prev) => prev.filter((item) => item.index !== index));
-      setActivePlus((prev) => prev.filter((item) => item !== index));
-    } else {
-      axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
-      setBasketItems((prev) => prev.filter((item) => item.index !== index));
-      setActivePlus((prev) => prev.filter((item) => item !== index));
-    }
+    axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
+    setBasketItems((prev) => prev.filter((item) => item.index !== index));
+    setActivePlus((prev) => prev.filter((item) => item !== index));
   };
 
   return (
