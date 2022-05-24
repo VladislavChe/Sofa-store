@@ -10,9 +10,12 @@ import logo from '../../img/logo.png';
 import mattresses from '../../img/mattresses.png';
 import poufs from '../../img/poufs.png';
 import sofa from '../../img/sofa.png';
+import AppContext from './../../context';
 import styles from './Header.module.scss';
 
-const Header = ({ onClickCart, allModels, setModels, showHeaderModels, setSearchValue }) => {
+const Header = ({ onClickCart }) => {
+  const { allModels, setModels, showHeaderModels } = React.useContext(AppContext);
+
   const headerModels = [
     {
       url: sofa,
@@ -58,7 +61,6 @@ const Header = ({ onClickCart, allModels, setModels, showHeaderModels, setSearch
   const onClickItem = (obj, index, title) => {
     setActiveItem(obj);
     setActiveIndex(index);
-    // setSearchValue(title);
   };
 
   React.useEffect(() => {
@@ -87,7 +89,7 @@ const Header = ({ onClickCart, allModels, setModels, showHeaderModels, setSearch
       <nav className={styles.menu}>
         <ul className={`justify-between align-center d-flex ${styles.list}`}>
           <li>
-            <NavLink to={'/galery'}>
+            <NavLink to={'/'}>
               <img src={logo} alt="logo" className={styles.logo} />
             </NavLink>
           </li>

@@ -7,6 +7,7 @@ import Basket from './Components/Basket/Basket';
 import Favourite from './Components/Favourite/Favourite';
 import Gallery from './Components/Gallery/Gallery';
 import Header from './Components/Header/Header';
+import AppContext from './context';
 import alba from './img/models/alba.png';
 import arni from './img/models/arni.png';
 import boorbon from './img/models/boorbon.png';
@@ -182,116 +183,46 @@ function App() {
   const [basketItems, setBasketItems] = React.useState([]);
   const addToCart = (url, title, price, index) => {
     let model = { url, title, price, index };
-
-    axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
     setBasketItems((prevState) => [...prevState, model]);
-
-    // //Проверка на существующий товар в корзине
-    // let checkItems = basketItems.some(function (e) {
-    //   return e.index == index;
-    // });
-
-    // if (!checkItems) {
-    //   axios.post('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart', model);
-    //   setBasketItems((prevState) => [...prevState, model]);
-    // }
   };
 
-  const deleteBasketItems = (index, id) => {
-    axios.delete(`https://6271742d25fed8fcb5e66f8f.mockapi.io/cart/${id}`);
+  const deleteBasketItems = (index) => {
     setBasketItems((prev) => prev.filter((item) => item.index !== index));
     setActivePlus((prev) => prev.filter((item) => item !== index));
   };
 
   return (
     <BrowserRouter>
-      <div className="App">
-        {openBasket && (
-          <Basket
-            items={basketItems}
-            setBasketItems={setBasketItems}
-            activePlus={activePlus}
-            setActivePlus={setActivePlus}
-            onClickCart={() => setOpenBasket(false)}
-            deleteBasketItems={deleteBasketItems}
-          />
-        )}
-        <div className="container">
-          {!loading && (
-            <Header
-              allModels={allModels}
-              models={models}
-              setModels={setModels}
-              onClickCart={() => setOpenBasket(true)}
-              showHeaderModels={showHeaderModels}
-              setSearchValue={setSearchValue}
-            />
-          )}
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Gallery
-                  allModels={allModels}
-                  models={models}
-                  setModels={setModels}
-                  addToCart={addToCart}
-                  activePlus={activePlus}
-                  setActivePlus={setActivePlus}
-                  activeHurt={activeHurt}
-                  setActiveHurt={setActiveHurt}
-                  deleteBasketItems={deleteBasketItems}
-                  basketItems={basketItems}
-                  setFavouriteModels={setFavouriteModels}
-                  favouriteModels={favouriteModels}
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                />
-              }
-            />
-            <Route
-              path="galery"
-              element={
-                <Gallery
-                  allModels={allModels}
-                  models={models}
-                  setModels={setModels}
-                  addToCart={addToCart}
-                  activePlus={activePlus}
-                  setActivePlus={setActivePlus}
-                  activeHurt={activeHurt}
-                  setActiveHurt={setActiveHurt}
-                  deleteBasketItems={deleteBasketItems}
-                  basketItems={basketItems}
-                  setFavouriteModels={setFavouriteModels}
-                  favouriteModels={favouriteModels}
-                  searchValue={searchValue}
-                  setSearchValue={setSearchValue}
-                />
-              }
-            />
-            <Route
-              path="favourite"
-              element={
-                <Favourite
-                  setShowHeaderModels={setShowHeaderModels}
-                  allModels={allModels}
-                  models={models}
-                  setModels={setModels}
-                  addToCart={addToCart}
-                  activePlus={activePlus}
-                  setActivePlus={setActivePlus}
-                  activeHurt={activeHurt}
-                  setActiveHurt={setActiveHurt}
-                  favouriteModels={favouriteModels}
-                  setFavouriteModels={setFavouriteModels}
-                />
-              }
-            />
-          </Routes>
+      <AppContext.Provider
+        value={{
+          showHeaderModels,
+          setShowHeaderModels,
+          allModels,
+          models,
+          setModels,
+          addToCart,
+          activePlus,
+          setActivePlus,
+          activeHurt,
+          setActiveHurt,
+          basketItems,
+          deleteBasketItems,
+          favouriteModels,
+          setFavouriteModels,
+          searchValue,
+          setSearchValue,
+        }}>
+        <div className="App">
+          {openBasket && <Basket onClickCart={() => setOpenBasket(false)} />}
+          <div className="container">
+            {!loading && <Header onClickCart={() => setOpenBasket(true)} />}
+            <Routes>
+              <Route path="/" element={<Gallery />} />
+              <Route exact path="favourite" element={<Favourite />} />
+            </Routes>
+          </div>
         </div>
-      </div>
+      </AppContext.Provider>
     </BrowserRouter>
   );
 }

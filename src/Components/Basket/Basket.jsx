@@ -1,28 +1,16 @@
-import * as axios from 'axios';
 import React from 'react';
 import Box from '../../img/box.png';
 import { ReactComponent as VectorLeft } from '../../img/vector-left.svg';
 import { ReactComponent as VectorRight } from '../../img/vector-right.svg';
 import Plus from '../_Utils/Plus/Plus';
+import AppContext from './../../context';
 import styles from './Basket.module.scss';
 
 const Basket = (props) => {
-  React.useEffect(() => {
-    axios
-      .get('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart')
-      .then(function (response) {
-        props.setBasketItems(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .then(function () {
-        // always executed
-      });
-  }, []);
+  const { basketItems, deleteBasketItems } = React.useContext(AppContext);
 
-  const onRemoveItem = (index, id) => {
-    props.deleteBasketItems(index, id);
+  const onRemoveItem = (index) => {
+    deleteBasketItems(index);
   };
 
   return (
@@ -34,17 +22,17 @@ const Basket = (props) => {
             <Plus check={false} deg45={true} />
           </div>
         </div>
-        {props.items.length > 0 ? (
+        {basketItems.length > 0 ? (
           <div className={styles.body}>
             <div className={styles.list}>
-              {props.items.map((item, index) => (
+              {basketItems.map((item, index) => (
                 <li key={`${item} ${index}`} className={styles.item}>
                   <img className={styles.modelPic} src={item.url} alt="sofa" />
                   <div className={styles.wrapper}>
                     <h4>{item.title}</h4>
                     <span>{item.price} руб.</span>
                   </div>
-                  <div onClick={() => onRemoveItem(item.index, item.id)}>
+                  <div onClick={() => onRemoveItem(item.index)}>
                     <Plus check={false} deg45={true} />
                   </div>
                 </li>

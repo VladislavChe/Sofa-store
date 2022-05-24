@@ -1,22 +1,25 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as Vektor } from '../../img/vector-back.svg';
+import AppContext from './../../context';
 import Card from './../Card/Card';
 import styles from './Favourite.module.scss';
 
-const Favourite = ({
-  activeHurt,
-  setActiveHurt,
-  setShowHeaderModels,
-  addToCart,
-  activePlus,
-  setActivePlus,
-  favouriteModels,
-  deleteBasketItems,
-  basketItems,
-  setFavouriteModels,
-  models,
-}) => {
+const Favourite = ({}) => {
+  const {
+    activeHurt,
+    setActiveHurt,
+    setShowHeaderModels,
+    addToCart,
+    activePlus,
+    setActivePlus,
+    favouriteModels,
+    deleteBasketItems,
+    basketItems,
+    setFavouriteModels,
+    models,
+  } = React.useContext(AppContext);
+
   React.useEffect(() => {
     setShowHeaderModels(false);
   }, []);
@@ -24,7 +27,7 @@ const Favourite = ({
   return (
     <div className={styles.favourite}>
       <div className={styles.row}>
-        <NavLink to={'/galery'}>
+        <NavLink to={'/'}>
           <div className={styles.back}>
             <Vektor />
           </div>

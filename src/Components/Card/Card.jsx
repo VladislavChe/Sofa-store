@@ -1,4 +1,3 @@
-import * as axios from 'axios';
 import React from 'react';
 import { ReactComponent as HurtChecked } from '../../img/hurt-checked.svg';
 import { ReactComponent as Hurt } from '../../img/hurt.svg';
@@ -32,23 +31,12 @@ const Card = ({
   };
 
   const clickOnPlus = () => {
-    if (activePlus.includes(index)) {
-      axios
-        .get('https://6271742d25fed8fcb5e66f8f.mockapi.io/cart')
-        .then(function (response) {
-          let toDeleteItem = response.data.filter((item) => item.index === index);
-          toDeleteItem.map((obj) => deleteBasketItems(obj.index, obj.id));
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
-    } else {
+    if (!activePlus.includes(index)) {
       addToCart(url, title, price, index);
 
       setActivePlus((prevState) => [...prevState, index]);
+    } else {
+      deleteBasketItems(index);
     }
   };
 

@@ -5,24 +5,27 @@ import { ReactComponent as Layout8 } from '../../img/layout-8.svg';
 import { ReactComponent as SearchLoop } from '../../img/search-loop.svg';
 import Card from '../Card/Card';
 import SubMenu from '../SubMenu/SubMenu';
+import AppContext from './../../context';
 import styles from './Gallery.module.scss';
 
-const Gallery = ({
-  activeHurt,
-  setActiveHurt,
-  addToCart,
-  allModels,
-  models,
-  setModels,
-  activePlus,
-  setActivePlus,
-  deleteBasketItems,
-  basketItems,
-  setFavouriteModels,
-  favouriteModels,
-  searchValue,
-  setSearchValue,
-}) => {
+const Gallery = (props) => {
+  const {
+    activeHurt,
+    setActiveHurt,
+    addToCart,
+    allModels,
+    models,
+    setModels,
+    activePlus,
+    setActivePlus,
+    deleteBasketItems,
+    basketItems,
+    setFavouriteModels,
+    favouriteModels,
+    searchValue,
+    setSearchValue,
+  } = React.useContext(AppContext);
+
   //Сортировка из searchInput
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
@@ -33,6 +36,7 @@ const Gallery = ({
       setModels(allModels);
     }
   };
+
   React.useEffect(() => {
     setModels(
       allModels.filter((item) =>
