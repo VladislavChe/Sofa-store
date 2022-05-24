@@ -20,9 +20,10 @@ const Gallery = ({
   basketItems,
   setFavouriteModels,
   favouriteModels,
+  searchValue,
+  setSearchValue,
 }) => {
   //Сортировка из searchInput
-  const [searchValue, setSearchValue] = React.useState('');
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
     setVisibleAutoCompleteMenu(true);

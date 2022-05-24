@@ -12,7 +12,7 @@ import poufs from '../../img/poufs.png';
 import sofa from '../../img/sofa.png';
 import styles from './Header.module.scss';
 
-const Header = ({ onClickCart, allModels, setModels, showHeaderModels }) => {
+const Header = ({ onClickCart, allModels, setModels, showHeaderModels, setSearchValue }) => {
   const headerModels = [
     {
       url: sofa,
@@ -55,10 +55,12 @@ const Header = ({ onClickCart, allModels, setModels, showHeaderModels }) => {
   const [activeItem, setActiveItem] = React.useState(false);
   const [activeIndex, setActiveIndex] = React.useState(false);
 
-  const onClickItem = (obj, index) => {
+  const onClickItem = (obj, index, title) => {
     setActiveItem(obj);
     setActiveIndex(index);
+    // setSearchValue(title);
   };
+
   React.useEffect(() => {
     if (activeItem) {
       setModels(
@@ -106,7 +108,7 @@ const Header = ({ onClickCart, allModels, setModels, showHeaderModels }) => {
           {headerModels.map((obj, index) => (
             <li
               className={activeIndex === index ? styles.active : null}
-              onClick={() => onClickItem(obj, index)}
+              onClick={() => onClickItem(obj, index, obj.title)}
               key={`${obj} ${index}`}>
               <img src={obj.url} alt={obj.title} />
               <span>{obj.title}</span>

@@ -31,11 +31,12 @@ function App() {
   const [allModels, setAllModels] = React.useState([]);
   const [models, setModels] = React.useState(allModels);
   const [favouriteModels, setFavouriteModels] = React.useState([]);
+  const [showHeaderModels, setShowHeaderModels] = React.useState(true);
 
   const [activePlus, setActivePlus] = React.useState([]);
   const [activeHurt, setActiveHurt] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
-  const [showHeaderModels, setShowHeaderModels] = React.useState(true);
+  const [searchValue, setSearchValue] = React.useState('');
 
   const getAllModels = () => {
     axios
@@ -223,6 +224,7 @@ function App() {
               setModels={setModels}
               onClickCart={() => setOpenBasket(true)}
               showHeaderModels={showHeaderModels}
+              setSearchValue={setSearchValue}
             />
           )}
           <Routes>
@@ -243,6 +245,8 @@ function App() {
                   basketItems={basketItems}
                   setFavouriteModels={setFavouriteModels}
                   favouriteModels={favouriteModels}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
                 />
               }
             />
@@ -262,6 +266,8 @@ function App() {
                   basketItems={basketItems}
                   setFavouriteModels={setFavouriteModels}
                   favouriteModels={favouriteModels}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
                 />
               }
             />
