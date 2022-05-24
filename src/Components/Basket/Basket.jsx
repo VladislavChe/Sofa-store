@@ -1,16 +1,26 @@
 import React from 'react';
 import Box from '../../img/box.png';
-import { ReactComponent as VectorLeft } from '../../img/vector-left.svg';
+import Order from '../../img/order.png';
 import { ReactComponent as VectorRight } from '../../img/vector-right.svg';
+import Info from '../_Utils/Info/Info';
 import Plus from '../_Utils/Plus/Plus';
 import AppContext from './../../context';
 import styles from './Basket.module.scss';
 
 const Basket = (props) => {
-  const { basketItems, deleteBasketItems } = React.useContext(AppContext);
+  const { basketItems, deleteBasketItems, showCart, setBasketItems, setActivePlus } =
+    React.useContext(AppContext);
+
+  const [isOrder, setIsOrder] = React.useState(false);
 
   const onRemoveItem = (index) => {
     deleteBasketItems(index);
+  };
+
+  const createOrder = () => {
+    setBasketItems([]);
+    setActivePlus([]);
+    setIsOrder(true);
   };
 
   return (
@@ -18,7 +28,7 @@ const Basket = (props) => {
       <div className={styles.line}>
         <div className={styles.top}>
           <h2 className={styles.title}>Корзина</h2>
-          <div onClick={props.onClickCart}>
+          <div onClick={() => showCart(false)}>
             <Plus check={false} deg45={true} />
           </div>
         </div>
@@ -44,22 +54,23 @@ const Basket = (props) => {
                 <div className={styles.dotted}></div>
                 <span className={styles.totalSum}>21 498 руб.</span>
               </div>
-              <button className={styles.btn}>
+              <button onClick={createOrder} className={styles.btn}>
                 <span>Оформить заказ</span>
                 <VectorRight className={styles.svg} />
               </button>
             </div>
           </div>
         ) : (
-          <div className={styles.box}>
-            <img className={styles.boxImg} src={Box} alt="box" />
-            <h3 className={styles.boxTitle}>Корзина пустая</h3>
-            <p className={styles.boxText}>Добавьте хотя бы один товар, чтобы сделать заказ</p>
-            <button onClick={props.onClickCart} className={`${styles.btn} ${styles.btn_Left}`}>
-              <VectorLeft className={styles.svg} />
-              <span>Вернуться назад</span>
-            </button>
-          </div>
+          <Info
+            isOrder={isOrder}
+            img={isOrder ? Order : Box}
+            title={isOrder ? 'Заказ оформлен!' : 'Корзина пустая'}
+            description={
+              isOrder
+                ? 'Ваш заказ #18 скоро будет передан курьерской доставке'
+                : 'Добавьте хотя бы один товар, чтобы сделать заказ'
+            }
+          />
         )}
       </div>
     </div>

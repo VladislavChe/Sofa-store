@@ -24,7 +24,12 @@ const Gallery = (props) => {
     favouriteModels,
     searchValue,
     setSearchValue,
+    setShowHeaderModels,
   } = React.useContext(AppContext);
+
+  React.useEffect(() => {
+    setShowHeaderModels(true);
+  }, []);
 
   //Сортировка из searchInput
   const onChangeSearchInput = (event) => {

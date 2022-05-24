@@ -186,6 +186,10 @@ function App() {
     setBasketItems((prevState) => [...prevState, model]);
   };
 
+  const showCart = (boolean) => {
+    setOpenBasket(boolean);
+  };
+
   const deleteBasketItems = (index) => {
     setBasketItems((prev) => prev.filter((item) => item.index !== index));
     setActivePlus((prev) => prev.filter((item) => item !== index));
@@ -195,11 +199,7 @@ function App() {
     <BrowserRouter>
       <AppContext.Provider
         value={{
-          showHeaderModels,
-          setShowHeaderModels,
           allModels,
-          models,
-          setModels,
           addToCart,
           activePlus,
           setActivePlus,
@@ -207,15 +207,21 @@ function App() {
           setActiveHurt,
           basketItems,
           deleteBasketItems,
+          setBasketItems,
           favouriteModels,
+          models,
+          showCart,
+          showHeaderModels,
+          setShowHeaderModels,
+          setModels,
           setFavouriteModels,
           searchValue,
           setSearchValue,
         }}>
         <div className="App">
-          {openBasket && <Basket onClickCart={() => setOpenBasket(false)} />}
+          {openBasket && <Basket />}
           <div className="container">
-            {!loading && <Header onClickCart={() => setOpenBasket(true)} />}
+            {!loading && <Header />}
             <Routes>
               <Route path="/" element={<Gallery />} />
               <Route exact path="favourite" element={<Favourite />} />
