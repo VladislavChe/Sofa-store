@@ -7,8 +7,8 @@ import Plus from '../_Utils/Plus/Plus';
 import AppContext from './../../context';
 import styles from './Basket.module.scss';
 
-const Basket = (props) => {
-  const { basketItems, deleteBasketItems, showCart, setBasketItems, setActivePlus } =
+const Basket = ({ openBasket }) => {
+  const { basketItems, deleteBasketItems, showCart, setBasketItems, setActivePlus, totalPrice } =
     React.useContext(AppContext);
 
   const [isOrder, setIsOrder] = React.useState(false);
@@ -24,8 +24,8 @@ const Basket = (props) => {
   };
 
   return (
-    <div className={styles.basket}>
-      <div className={styles.line}>
+    <div className={`${styles.basket} ${openBasket ? styles.basket_visible : ''}`}>
+      <div className={`${styles.line} ${openBasket ? styles.line_visible : ''}`}>
         <div className={styles.top}>
           <h2 className={styles.title}>Корзина</h2>
           <div onClick={() => showCart(false)}>
@@ -52,7 +52,7 @@ const Basket = (props) => {
               <div className={styles.countPrice}>
                 <span className={styles.totalText}>Итого: </span>
                 <div className={styles.dotted}></div>
-                <span className={styles.totalSum}>21 498 руб.</span>
+                <span className={styles.totalSum}>{totalPrice} руб.</span>
               </div>
               <button onClick={createOrder} className={styles.btn}>
                 <span>Оформить заказ</span>

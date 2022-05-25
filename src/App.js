@@ -195,6 +195,8 @@ function App() {
     setActivePlus((prev) => prev.filter((item) => item !== index));
   };
 
+  const totalPrice = basketItems.reduce((sum, obj) => obj.price + sum, 0);
+
   return (
     <BrowserRouter>
       <AppContext.Provider
@@ -217,9 +219,10 @@ function App() {
           setFavouriteModels,
           searchValue,
           setSearchValue,
+          totalPrice,
         }}>
         <div className="App">
-          {openBasket && <Basket />}
+          <Basket openBasket={openBasket} />
           <div className="container">
             {!loading && <Header />}
             <Routes>

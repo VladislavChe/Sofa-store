@@ -13,8 +13,9 @@ import sofa from '../../img/sofa.png';
 import AppContext from './../../context';
 import styles from './Header.module.scss';
 
-const Header = ({ onClickCart }) => {
-  const { allModels, setModels, showHeaderModels, showCart } = React.useContext(AppContext);
+const Header = (props) => {
+  const { allModels, setModels, showHeaderModels, showCart, totalPrice } =
+    React.useContext(AppContext);
 
   const headerModels = [
     {
@@ -98,9 +99,9 @@ const Header = ({ onClickCart }) => {
               <Hurt width={'20px'} height={'20px'} />
             </NavLink>
             <div onClick={() => showCart(true)} className={styles.summ}>
-              <span>1758 руб.</span>
+              <span>{totalPrice} руб.</span>
               <Cart width={'30px'} height={'30px'} />
-              <div className={styles.gold}></div>
+              <div className={totalPrice > 0 ? styles.gold : null}></div>
             </div>
           </li>
         </ul>
