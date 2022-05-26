@@ -1,4 +1,4 @@
-app link: https://sofa-store.vladislav-che.ru/
+App link: https://sofa-store.vladislav-che.ru/
 
 In this project I used:  
 React  
