@@ -36,7 +36,7 @@
   }
 
   svg:first-child {
-    margin-right: 20px;
+    margin-right: 10px;
   }
 }
 
@@ -75,4 +75,26 @@
 
 .active {
   color: #ff9619;
+}
+
+/*Responsive*/
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+  .furniture {
+    display: none;
+  }
+}
+
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  .logo {
+    width: auto;
+  }
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .logo {
+    width: 130px;
+  }
 }

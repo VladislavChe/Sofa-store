@@ -86,3 +86,19 @@
     }
   }
 }
+
+/*Responsive*/
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  .menu {
+    order: 1;
+  }
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .menu {
+    margin-bottom: 30px;
+    z-index: 0;
+  }
+}

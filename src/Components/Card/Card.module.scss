@@ -5,11 +5,11 @@
     margin: 0 0 40px 0;
 
     &:nth-child(odd) {
-      justify-self: end;
+      align-self: end;
       margin-right: 33px;
     }
     &:nth-child(even) {
-      justify-self: start;
+      align-self: start;
     }
 
     .card {
@@ -146,4 +146,63 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: 700;
+}
+/*Responsive*/
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+  .models {
+    grid-template-columns: repeat(2, 1fr);
+
+    &_two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .cardColumn {
+    &:nth-child(odd) {
+      margin-right: 25px;
+    }
+    &:nth-child(even) {
+      margin-left: 25px;
+    }
+    &_two {
+      &:nth-child(odd) {
+        margin-right: 7px;
+      }
+      &:nth-child(even) {
+        margin-left: 7px;
+      }
+    }
+  }
+}
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+  .cardColumn {
+    max-width: 500px;
+
+    &_two {
+      &:nth-child(odd) {
+        margin: 0 auto 25px auto;
+      }
+      &:nth-child(even) {
+        margin: 0 auto 25px auto;
+      }
+    }
+  }
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .cardColumn {
+    &:nth-child(odd) {
+      margin: 0 auto 20px auto;
+    }
+    &:nth-child(even) {
+      margin: 0 auto 20px auto;
+    }
+    &_two {
+      .body {
+        flex-direction: column;
+      }
+    }
+  }
 }

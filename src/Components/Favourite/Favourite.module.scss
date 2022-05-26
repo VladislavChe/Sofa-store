@@ -47,3 +47,22 @@
   grid-template-columns: repeat(1, 1fr);
   margin-top: 50px;
 }
+
+/*Responsive*/
+/* 768px - 992px */
+@media screen and (max-width: 992px) {
+  .favouriteList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 576px - 768px */
+@media screen and (max-width: 768px) {
+}
+
+/* 320px - 576px */
+@media screen and (max-width: 576px) {
+  .favouriteList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
