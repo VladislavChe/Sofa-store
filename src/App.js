@@ -181,6 +181,11 @@ function App() {
   //Корзина
   const [openBasket, setOpenBasket] = React.useState(false);
   const [basketItems, setBasketItems] = React.useState([]);
+  const [totalPrice, setTotalPrice] = React.useState(0);
+  React.useEffect(() => {
+    setTotalPrice(basketItems.reduce((sum, obj) => obj.price + sum, 0));
+  }, [basketItems]);
+
   const addToCart = (url, title, price, index) => {
     let model = { url, title, price, index };
     setBasketItems((prevState) => [...prevState, model]);
@@ -194,8 +199,6 @@ function App() {
     setBasketItems((prev) => prev.filter((item) => item.index !== index));
     setActivePlus((prev) => prev.filter((item) => item !== index));
   };
-
-  const totalPrice = basketItems.reduce((sum, obj) => obj.price + sum, 0);
 
   return (
     <BrowserRouter>
@@ -220,6 +223,7 @@ function App() {
           searchValue,
           setSearchValue,
           totalPrice,
+          setTotalPrice,
         }}>
         <div className="App">
           <Basket openBasket={openBasket} />

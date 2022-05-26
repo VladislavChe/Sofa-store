@@ -6,6 +6,7 @@ import Info from '../_Utils/Info/Info';
 import Plus from '../_Utils/Plus/Plus';
 import AppContext from './../../context';
 import styles from './Basket.module.scss';
+import BasketItem from './BasketItem/BasketItem';
 
 const Basket = ({ openBasket }) => {
   const { basketItems, deleteBasketItems, showCart, setBasketItems, setActivePlus, totalPrice } =
@@ -36,16 +37,12 @@ const Basket = ({ openBasket }) => {
           <div className={styles.body}>
             <div className={styles.list}>
               {basketItems.map((item, index) => (
-                <li key={`${item} ${index}`} className={styles.item}>
-                  <img className={styles.modelPic} src={item.url} alt="sofa" />
-                  <div className={styles.wrapper}>
-                    <h4>{item.title}</h4>
-                    <span>{item.price} руб.</span>
-                  </div>
-                  <div onClick={() => onRemoveItem(item.index)}>
-                    <Plus check={false} deg45={true} />
-                  </div>
-                </li>
+                <BasketItem
+                  key={`${item} ${index}`}
+                  item={item}
+                  index={index}
+                  onRemoveItem={onRemoveItem}
+                />
               ))}
             </div>
             <div className={styles.bottom}>
