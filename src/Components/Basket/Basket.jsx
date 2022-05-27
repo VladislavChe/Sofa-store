@@ -41,6 +41,7 @@ const Basket = ({ openBasket }) => {
                   key={`${item} ${index}`}
                   item={item}
                   index={index}
+                  id={item.id}
                   onRemoveItem={onRemoveItem}
                 />
               ))}

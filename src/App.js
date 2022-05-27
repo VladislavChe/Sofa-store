@@ -50,117 +50,136 @@ function App() {
       .catch(function (error) {
         let models = [
           {
+            id: 1,
             url: martin,
             title: 'Martin',
-            description: 'Диваны',
+            description: 'Диваны Martin',
             price: 15000,
           },
           {
+            id: 2,
             url: alba,
             title: 'Alba',
-            description: 'Кресла',
+            description: 'Кресла Alba',
             price: 11000,
           },
           {
+            id: 3,
             url: toscana,
             title: 'Toscana',
-            description: 'Кресла',
+            description: 'Кресла Toscana',
             price: 10500,
           },
           {
+            id: 4,
             url: leonardo,
             title: 'Leonardo',
-            description: 'Диваны',
+            description: 'Диваны Leonardo',
             price: 12000,
           },
           {
+            id: 5,
             url: boorbon,
             title: 'Boorbon',
-            description: 'Диваны',
+            description: 'Диваны Boorbon',
             price: 17000,
           },
           {
+            id: 6,
             url: emilio,
             title: 'emilio',
-            description: 'Диваны',
+            description: 'Диваны emilio',
             price: 7000,
           },
           {
+            id: 7,
             url: nensi,
             title: 'nensi',
-            description: 'Кровати',
+            description: 'Кровати nensi',
             price: 13000,
           },
           {
+            id: 8,
             url: tatami,
             title: 'tatami',
-            description: 'Диваны',
+            description: 'Диваны tatami',
             price: 14000,
           },
           {
+            id: 9,
             url: regina,
             title: 'regina',
-            description: 'Диваны',
+            description: 'Диваны regina',
             price: 16000,
           },
           {
+            id: 10,
             url: malta,
             title: 'malta',
-            description: 'Матрацы',
+            description: 'Матрацы malta',
             price: 5000,
           },
           {
+            id: 11,
             url: versal,
             title: 'versal',
-            description: 'Пуфы',
+            description: 'Пуфы versal',
             price: 4000,
           },
           {
+            id: 12,
             url: exclusive1,
             title: 'exclusive 1',
-            description: 'Эксклюзивная мебель',
+            description: 'Эксклюзивная мебель exclusive 1',
             price: 24000,
           },
           {
+            id: 13,
             url: floret,
             title: 'floret',
-            description: 'Кресла',
+            description: 'Кресла floret',
             price: 8000,
           },
           {
+            id: 14,
             url: exlusivebed2,
             title: 'exlusive bed 2',
-            description: 'Кровати Эксклюзивная мебель',
+            description: 'Кровати Эксклюзивная мебель exlusive bed 2',
             price: 18000,
           },
           {
+            id: 15,
             url: arni,
             title: 'arni',
-            description: 'Диваны',
+            description: 'Диваны arni',
             price: 9000,
           },
           {
+            id: 16,
             url: taiti,
             title: 'taiti',
-            description: 'Матрацы',
+            description: 'Матрацы taiti',
             price: 8000,
           },
           {
+            id: 17,
             url: chair1,
             title: 'chair 1',
-            description: 'Стулья',
+            description: 'Стулья chair 1',
             price: 6000,
           },
           {
+            id: 18,
             url: chair2,
             title: 'chair 2',
-            description: 'Стулья',
+            description: 'Стулья chair 2',
             price: 8000,
           },
           {
+            id: 19,
             url: exclusive3,
             title: 'exclusive 3',
-            description: 'Стулья Эксклюзивная мебель',
+            description: 'Стулья Эксклюзивная мебель exclusive3',
             price: 12000,
           },
         ];
@@ -186,8 +205,8 @@ function App() {
     setTotalPrice(basketItems.reduce((sum, obj) => obj.price + sum, 0));
   }, [basketItems]);
 
-  const addToCart = (url, title, price, index) => {
-    let model = { url, title, price, index };
+  const addToCart = (url, title, price, index, id) => {
+    let model = { url, title, price, index, id };
     setBasketItems((prevState) => [...prevState, model]);
   };
 
@@ -195,9 +214,9 @@ function App() {
     setOpenBasket(boolean);
   };
 
-  const deleteBasketItems = (index) => {
-    setBasketItems((prev) => prev.filter((item) => item.index !== index));
-    setActivePlus((prev) => prev.filter((item) => item !== index));
+  const deleteBasketItems = (id) => {
+    setBasketItems((prev) => prev.filter((item) => item.id !== id));
+    setActivePlus((prev) => prev.filter((item) => item !== id));
   };
 
   return (

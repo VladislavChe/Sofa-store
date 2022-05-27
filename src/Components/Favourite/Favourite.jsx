@@ -55,6 +55,7 @@ const Favourite = ({}) => {
               addToCart={addToCart}
               key={`${obj} ${index}`}
               index={obj.index}
+              id={obj.id}
               url={obj.url}
               title={obj.title}
               price={obj.price}

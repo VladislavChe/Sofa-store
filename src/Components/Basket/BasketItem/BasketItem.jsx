@@ -3,7 +3,7 @@ import AppContext from '../../../context';
 import Plus from '../../_Utils/Plus/Plus';
 import styles from './BasketItem.module.scss';
 
-const BasketItem = ({ item, index, onRemoveItem }) => {
+const BasketItem = ({ item, index, id, onRemoveItem }) => {
   const { totalPrice, setTotalPrice } = React.useContext(AppContext);
 
   const [count, setCount] = React.useState(1);
@@ -36,7 +36,7 @@ const BasketItem = ({ item, index, onRemoveItem }) => {
           <h4>{item.title}</h4>
           <span>{item.price} руб.</span>
         </div>
-        <div onClick={() => onRemoveItem(item.index)}>
+        <div onClick={() => onRemoveItem(id)}>
           <Plus check={false} deg45={true} />
         </div>
       </li>

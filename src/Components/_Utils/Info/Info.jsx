@@ -5,9 +5,6 @@ import AppContext from './../../../context';
 import styles from './Info.module.scss';
 
 const Info = ({ img, title, description, isOrder, nav }) => {
-  if (nav) {
-    console.log('da');
-  }
   const { showCart } = React.useContext(AppContext);
   return (
     <div className={styles.box}>

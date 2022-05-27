@@ -10,6 +10,7 @@ const Card = ({
   price,
   addToCart,
   index,
+  id,
   activeLayout,
   activePlus,
   setActivePlus,
@@ -19,24 +20,24 @@ const Card = ({
   setFavouriteModels,
 }) => {
   const onSelectHurt = () => {
-    let favObj = { url, title, price, index };
+    let favObj = { url, title, price, index, id };
 
-    if (activeHurt.includes(index)) {
-      setActiveHurt((prev) => prev.filter((item) => item !== index));
-      setFavouriteModels((prev) => prev.filter((item) => item.index !== index));
+    if (activeHurt.includes(id)) {
+      setActiveHurt((prev) => prev.filter((item) => item !== id));
+      setFavouriteModels((prev) => prev.filter((item) => item.id !== id));
     } else {
-      setActiveHurt((prevState) => [...prevState, index]);
+      setActiveHurt((prevState) => [...prevState, id]);
       setFavouriteModels((prevState) => [...prevState, favObj]);
     }
   };
 
   const clickOnPlus = () => {
-    if (!activePlus.includes(index)) {
-      addToCart(url, title, price, index);
+    if (!activePlus.includes(id)) {
+      addToCart(url, title, price, index, id);
 
-      setActivePlus((prevState) => [...prevState, index]);
+      setActivePlus((prevState) => [...prevState, id]);
     } else {
-      deleteBasketItems(index);
+      deleteBasketItems(id);
     }
   };
 
@@ -45,8 +46,8 @@ const Card = ({
       <div className={styles.card}>
         <div
           onClick={onSelectHurt}
-          className={`${styles.hurt} ${activeHurt.includes(index) ? styles.active : ''}`}>
-          {activeHurt.includes(index) ? <HurtChecked /> : <Hurt />}
+          className={`${styles.hurt} ${activeHurt.includes(id) ? styles.active : ''}`}>
+          {activeHurt.includes(id) ? <HurtChecked /> : <Hurt />}
         </div>
         <div className={styles.wrapper}>
           <div className={styles.body}>
@@ -70,7 +71,7 @@ const Card = ({
             </span>
           </div>
           <div onClick={clickOnPlus}>
-            <Plus check={activePlus.includes(index) ? true : false} />
+            <Plus check={activePlus.includes(id) ? true : false} />
           </div>
         </div>
       </div>

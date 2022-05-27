@@ -166,6 +166,7 @@ const Gallery = (props) => {
             addToCart={addToCart}
             key={`${obj} ${index}`}
             index={index}
+            id={obj.id}
             url={obj.url}
             title={obj.title}
             price={obj.price}

@@ -5,4 +5,6 @@ React
 React Router  
 React hooks  
 Rest API  
-Axios
+Axios  
+SCSS  
+React Context
