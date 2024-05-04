@@ -1,31 +1,31 @@
-$mainFont: 'Raleway', sans-serif;
-$OpenSans: 'Open Sans', sans-serif;
-$mainFontSize: 13px;
-$time: all 0.2s ease-in-out;
-$hoverColor: #ff9619;
+:root {
+  --main-font: "Raleway", sans-serif;
+  --main-font-size: 13px;
+}
 
 html,
 body {
   height: 100%;
   background-color: #fff;
-  font-family: $mainFont;
+  font-family: var(--main-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   color: #000;
-  font-size: $mainFontSize;
+  font-size: var(--main-font-size);
   text-transform: none;
   padding: 0;
   margin: 0;
-  body *,
-  body *:before,
-  body *:after {
-    box-sizing: border-box;
-  }
 }
 
 body {
   overflow-y: scroll;
+}
+
+body *,
+body *:before,
+body *:after {
+  box-sizing: border-box;
 }
 
 div,
@@ -36,7 +36,7 @@ form,
 span,
 ul,
 li {
-  font-family: $mainFont;
+  font-family: var(--main-font);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -48,7 +48,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: $mainFont;
+  font-family: var(--main-font);
   margin: 0;
   padding: 0;
   text-transform: uppercase;
@@ -113,10 +113,6 @@ img {
 input,
 li {
   list-style-type: none;
-}
-
-.App {
-  //position: relative;
 }
 
 .container {

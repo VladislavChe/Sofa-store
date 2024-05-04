@@ -40,13 +40,11 @@
 
   border: 1px solid #f3f3f3;
   border-radius: 40px;
-  transition: box-shadow 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out;
   cursor: pointer;
 
   &:hover {
     box-shadow: 0 14px 30px rgba(0, 0, 0, 0.05);
-    transition: box-shadow 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
     transform: translateY(-10px);
   }
@@ -124,7 +122,7 @@
   align-items: center;
   margin-top: 23px;
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
 }
 
@@ -143,7 +141,7 @@
 }
 
 .priceSum {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-weight: 700;
 }

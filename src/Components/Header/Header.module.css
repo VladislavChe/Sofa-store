@@ -24,14 +24,14 @@
 
 .tel {
   transition: all 0.2s ease-in-out;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .added {
   position: relative;
 
   span {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     transition: all 0.2s ease-in-out;
   }
 

@@ -8,7 +8,10 @@
 
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
 }
 
 .line {
@@ -29,7 +32,10 @@
 .basket_visible {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  transition:
+    opacity 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
 }
 
 .line_visible {
@@ -109,7 +115,7 @@
   cursor: pointer;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     height: 1px;
     width: 10px;
@@ -118,7 +124,7 @@
 }
 
 .count {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 15px;
 }
 
@@ -127,7 +133,7 @@
   margin-left: 10px;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     height: 1px;
     width: 10px;
@@ -148,7 +154,7 @@
   }
 
   span {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     font-weight: 700;
     text-transform: none;
@@ -173,7 +179,7 @@
 }
 
 .totalSum {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
 }
 
@@ -221,9 +227,6 @@
   align-items: center;
   flex: 1;
   transition: none;
-}
-
-.boxImg {
 }
 
 .boxTitle {
