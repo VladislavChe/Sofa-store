@@ -6,5 +6,5 @@ React Router
 React hooks  
 Rest API  
 Axios  
-SCSS  
+CSSModules  
 React Context
