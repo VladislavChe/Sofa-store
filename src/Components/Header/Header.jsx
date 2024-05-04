@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 import armchairs from "../../img/armchairs.png";
@@ -16,7 +16,7 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const { allModels, setModels, showHeaderModels, showCart, totalPrice } =
-    React.useContext(AppContext);
+    useContext(AppContext);
 
   const headerModels = [
     {
@@ -57,15 +57,15 @@ const Header = () => {
   ];
 
   //Сортировка из шапки
-  const [activeItem, setActiveItem] = React.useState(null);
-  const [activeIndex, setActiveIndex] = React.useState(null);
+  const [activeItem, setActiveItem] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
   const onClickItem = (obj, index) => () => {
     setActiveItem(obj);
     setActiveIndex(index);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeItem) {
       setModels(
         allModels.filter((item) =>
@@ -78,21 +78,20 @@ const Header = () => {
   }, [activeItem, setModels, allModels]);
 
   //Клик вне элемента
-  const itemsRef = React.useRef();
-  React.useEffect(() => {
+  const itemsRef = useRef();
+  useEffect(() => {
     document.body.addEventListener("click", handleOutsideClick);
+    return () => document.body.removeEventListener("click", handleOutsideClick);
   }, []);
   const handleOutsideClick = (e) => {
-    if (!e.path.includes(itemsRef.current)) {
-      setActiveIndex(null);
-    }
+    !itemsRef.current?.contains(e.target) && setActiveIndex(null);
   };
 
   const showCartHandler = () => showCart(true);
 
   return (
     <header className={styles.header}>
-      <nav className={styles.menu}>
+      <nav>
         <ul
           className={classNames(
             "justify-between align-center d-flex",
@@ -108,7 +107,7 @@ const Header = () => {
             <NavLink to={"/favourite"}>
               <Hurt width={"20px"} height={"20px"} />
             </NavLink>
-            <div onClick={showCartHandler} className={styles.summ}>
+            <div onClick={showCartHandler}>
               <span>{totalPrice} руб.</span>
               <Cart width={"30px"} height={"30px"} />
               <div className={classNames({ [styles.gold]: totalPrice > 0 })} />

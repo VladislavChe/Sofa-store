@@ -45,7 +45,7 @@
 
 .clear {
   position: absolute;
-  top: 12.5px;
+  top: 12px;
   right: 10px;
 
   font-size: 10px;
@@ -84,10 +84,10 @@
 .models {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+}
 
-  &_two {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.models_two {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 /*Responsive*/
@@ -95,10 +95,9 @@
 @media screen and (max-width: 992px) {
   .models {
     grid-template-columns: repeat(2, 1fr);
-
-    &_two {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  }
+  .models_two {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -123,10 +122,8 @@
   .searchInput {
     order: 2;
   }
-  .models {
-    &_two {
-      grid-template-columns: repeat(1, 1fr);
-    }
+  .models_two {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 

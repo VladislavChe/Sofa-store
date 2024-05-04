@@ -1,8 +1,7 @@
-import React from "react";
-//pictures
+import React, { useEffect, useRef, useState } from "react";
+import classNames from "classnames";
 import { ReactComponent as VectorDown } from "../../img/vector-down.svg";
 import styles from "./SubMenu.module.css";
-import classNames from "classnames";
 
 const SubMenu = ({
   allModels,
@@ -20,23 +19,23 @@ const SubMenu = ({
     "Эксклюзивная мебель",
   ];
 
-  const [visibleSubMenu, setVisibleSubMenu] = React.useState(false);
+  const [visibleSubMenu, setVisibleSubMenu] = useState(false);
+
+  const modelsRef = useRef();
+  useEffect(() => {
+    document.body.addEventListener("click", handleOutsideClick);
+    return () => document.body.removeEventListener("click", handleOutsideClick);
+  }, []);
+
+  const handleOutsideClick = (e) => {
+    !modelsRef.current?.contains(e.target) && setVisibleSubMenu(false);
+  };
   const toggleVisibleSubMenu = () => {
     setVisibleSubMenu(!visibleSubMenu);
   };
 
-  const modelsRef = React.useRef();
-  React.useEffect(() => {
-    document.body.addEventListener("click", handleOutsideClick);
-  }, []);
-  const handleOutsideClick = (e) => {
-    if (!e.path.includes(modelsRef.current)) {
-      setVisibleSubMenu(false);
-    }
-  };
-
-  const [activeItem, setActiveItem] = React.useState(null);
-  const [activeName, setActiveName] = React.useState("Товары");
+  const [activeItem, setActiveItem] = useState(null);
+  const [activeName, setActiveName] = useState("Товары");
   const onSelectItem = (index, model) => {
     setActiveItem(index);
     setVisibleSubMenu(!visibleSubMenu);

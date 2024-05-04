@@ -1,9 +1,9 @@
 import React from "react";
+import classNames from "classnames";
 import { ReactComponent as HurtChecked } from "../../img/hurt-checked.svg";
 import { ReactComponent as Hurt } from "../../img/hurt.svg";
 import Plus from "../_Utils/Plus/Plus";
 import styles from "./Card.module.css";
-import classNames from "classnames";
 
 const Card = ({
   url,

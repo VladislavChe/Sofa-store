@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import classNames from "classnames";
 import Box from "../../img/box.png";
 import Order from "../../img/order.png";
 import { ReactComponent as VectorRight } from "../../img/vector-right.svg";
 import Info from "../_Utils/Info/Info";
 import Plus from "../_Utils/Plus/Plus";
 import AppContext from "./../../context";
-import styles from "./Basket.module.css";
 import BasketItem from "./BasketItem/BasketItem";
-import classNames from "classnames";
+import styles from "./Basket.module.css";
 
 const Basket = ({ openBasket }) => {
   const {
@@ -17,9 +17,9 @@ const Basket = ({ openBasket }) => {
     setBasketItems,
     setActivePlus,
     totalPrice,
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
 
-  const [isOrder, setIsOrder] = React.useState(false);
+  const [isOrder, setIsOrder] = useState(false);
 
   const removeHandler = (id) => () => {
     deleteBasketItems(id);

@@ -1,6 +1,6 @@
 import axios from "axios";
 import "macro-css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Basket from "./Components/Basket/Basket";
 import Favourite from "./Components/Favourite/Favourite";
@@ -28,16 +28,15 @@ import toscana from "./img/models/toscana.png";
 import versal from "./img/models/versal.png";
 
 function App() {
-  return <div>hello</div>;
-  const [allModels, setAllModels] = React.useState([]);
-  const [models, setModels] = React.useState(allModels);
-  const [favouriteModels, setFavouriteModels] = React.useState([]);
-  const [showHeaderModels, setShowHeaderModels] = React.useState(true);
+  const [allModels, setAllModels] = useState([]);
+  const [models, setModels] = useState(allModels);
+  const [favouriteModels, setFavouriteModels] = useState([]);
+  const [showHeaderModels, setShowHeaderModels] = useState(true);
 
-  const [activePlus, setActivePlus] = React.useState([]);
-  const [activeHurt, setActiveHurt] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
-  const [searchValue, setSearchValue] = React.useState("");
+  const [activePlus, setActivePlus] = useState([]);
+  const [activeHurt, setActiveHurt] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   const getAllModels = () => {
     axios
@@ -192,16 +191,16 @@ function App() {
         // always executed
       });
   };
-  React.useEffect(() => {
+  useEffect(() => {
     setLoading(true);
     getAllModels();
   }, []);
 
   //Корзина
-  const [openBasket, setOpenBasket] = React.useState(false);
-  const [basketItems, setBasketItems] = React.useState([]);
-  const [totalPrice, setTotalPrice] = React.useState(0);
-  React.useEffect(() => {
+  const [openBasket, setOpenBasket] = useState(false);
+  const [basketItems, setBasketItems] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  useEffect(() => {
     setTotalPrice(basketItems.reduce((sum, obj) => obj.price + sum, 0));
   }, [basketItems]);
 
@@ -246,7 +245,6 @@ function App() {
         }}
       >
         <div className="App">
-          {/*
           <Basket openBasket={openBasket} />
           <div className="container">
             {!loading && <Header />}
@@ -255,7 +253,6 @@ function App() {
               <Route exact path="favourite" element={<Favourite />} />
             </Routes>
           </div>
-*/}
         </div>
       </AppContext.Provider>
     </BrowserRouter>

@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import AppContext from "../../../context";
 import Plus from "../../_Utils/Plus/Plus";
 import styles from "./BasketItem.module.css";
 
 const BasketItem = ({ item: { title, price, url }, removeHandler }) => {
-  const { totalPrice, setTotalPrice } = React.useContext(AppContext);
+  const { totalPrice, setTotalPrice } = useContext(AppContext);
 
-  const [count, setCount] = React.useState(1);
+  const [count, setCount] = useState(1);
 
   const changeCount = (boolean, price) => () => {
     if (boolean) {
@@ -20,7 +20,7 @@ const BasketItem = ({ item: { title, price, url }, removeHandler }) => {
 
   return (
     <li className={styles.item}>
-      <div className={styles.counterWrapp}>
+      <div className={styles.counterWrap}>
         <img className={styles.modelPic} src={url} alt="sofa" />
         <div className={styles.counter}>
           <div onClick={changeCount(false, price)} className={styles.less} />

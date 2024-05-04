@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+import classNames from "classnames";
 import { NavLink } from "react-router-dom";
 import { ReactComponent as VectorLeft } from "../../../img/vector-left.svg";
 import AppContext from "./../../../context";
 import styles from "./Info.module.css";
-import classNames from "classnames";
 
 const Info = ({ img, title, description, isOrder, nav }) => {
-  const { showCart } = React.useContext(AppContext);
+  const { showCart } = useContext(AppContext);
   const closeCart = () => showCart(false);
   const titleClassName = isOrder
     ? classNames(styles.boxTitle, styles.boxTitle_order)

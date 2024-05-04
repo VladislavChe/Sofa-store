@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import classNames from "classnames";
 import { ReactComponent as Layout4 } from "../../img/layout-4.svg";
-//pictures
 import { ReactComponent as Layout8 } from "../../img/layout-8.svg";
 import { ReactComponent as SearchLoop } from "../../img/search-loop.svg";
 import Card from "../Card/Card";
 import SubMenu from "../SubMenu/SubMenu";
 import AppContext from "./../../context";
 import styles from "./Gallery.module.css";
-import classNames from "classnames";
 
 const Gallery = () => {
   const {
@@ -26,9 +25,9 @@ const Gallery = () => {
     searchValue,
     setSearchValue,
     setShowHeaderModels,
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setShowHeaderModels(true);
   }, [setShowHeaderModels]);
 
@@ -43,7 +42,7 @@ const Gallery = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setModels(
       allModels.filter((item) =>
         item.description.toLowerCase().includes(searchValue.toLowerCase()),
@@ -52,8 +51,8 @@ const Gallery = () => {
   }, [searchValue, setModels, allModels]);
 
   //Сортировка по фильтру из subMenu
-  const [activeSubMenuItem, setActiveSubMenuItem] = React.useState("");
-  React.useEffect(() => {
+  const [activeSubMenuItem, setActiveSubMenuItem] = useState("");
+  useEffect(() => {
     setModels(
       allModels.filter((item) =>
         item.description
@@ -64,8 +63,7 @@ const Gallery = () => {
   }, [activeSubMenuItem, setModels, allModels]);
 
   //Autocomplete menu
-  const [visibleAutoCompleteMenu, setVisibleAutoCompleteMenu] =
-    React.useState(false);
+  const [visibleAutoCompleteMenu, setVisibleAutoCompleteMenu] = useState(false);
   const clearSearchInput = () => {
     setSearchValue("");
     setVisibleAutoCompleteMenu(false);
@@ -99,14 +97,16 @@ const Gallery = () => {
       return <span className={styles.notSearch}>ничего не найдено</span>;
     }
   };
-  const autoCompleteMenuRef = React.useRef();
-  React.useEffect(() => {
+  const autoCompleteMenuRef = useRef();
+  useEffect(() => {
     document.body.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.body.removeEventListener("click", handleOutsideClick);
+    };
   }, []);
   const handleOutsideClick = (e) => {
-    if (!e.path.includes(autoCompleteMenuRef.current)) {
+    !autoCompleteMenuRef.current?.contains(e.target) &&
       setVisibleAutoCompleteMenu(false);
-    }
   };
 
   // Выбор раскладки моделей
@@ -114,7 +114,7 @@ const Gallery = () => {
     <Layout8 width={"55px"} height={"26px"} />,
     <Layout4 width={"55px"} height={"26px"} />,
   ];
-  const [activeLayout, setActiveLayout] = React.useState(0);
+  const [activeLayout, setActiveLayout] = useState(0);
   const onSelectLayout = (index) => () => {
     setActiveLayout(index);
   };

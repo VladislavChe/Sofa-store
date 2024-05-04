@@ -1,6 +1,6 @@
 import React from "react";
-import Check from "../../../img/check-arrow.jpg";
 import classNames from "classnames";
+import Check from "../../../img/check-arrow.jpg";
 import styles from "./Plus.module.css";
 
 const Plus = ({ deg45, check }) => {

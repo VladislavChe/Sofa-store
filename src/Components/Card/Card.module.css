@@ -1,36 +1,36 @@
 .cardColumn {
   margin: 0 auto 40px auto;
+}
 
-  &_two {
-    margin: 0 0 40px 0;
+.cardColumn_two {
+  margin: 0 0 40px 0;
 
-    &:nth-child(odd) {
-      align-self: end;
-      margin-right: 33px;
-    }
-    &:nth-child(even) {
-      align-self: start;
-    }
+  &:nth-child(odd) {
+    align-self: end;
+    margin-right: 33px;
+  }
+  &:nth-child(even) {
+    align-self: start;
+  }
 
-    .card {
-      width: 100%;
-    }
-    .body {
-      display: flex;
-      align-items: center;
-    }
-    .cont {
-      margin-left: 30px;
-      transition: none;
-    }
-    .title {
-      margin-bottom: 10px;
-      text-align: left;
-      transition: none;
-    }
-    .text {
-      display: block;
-    }
+  .card {
+    width: 100%;
+  }
+  .body {
+    display: flex;
+    align-items: center;
+  }
+  .cont {
+    margin-left: 30px;
+    transition: none;
+  }
+  .title {
+    margin-bottom: 10px;
+    text-align: left;
+    transition: none;
+  }
+  .text {
+    display: block;
   }
 }
 
@@ -150,10 +150,9 @@
 @media screen and (max-width: 992px) {
   .models {
     grid-template-columns: repeat(2, 1fr);
-
-    &_two {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  }
+  .models_two {
+    grid-template-columns: repeat(2, 1fr);
   }
   .cardColumn {
     &:nth-child(odd) {
@@ -162,13 +161,13 @@
     &:nth-child(even) {
       margin-left: 25px;
     }
-    &_two {
-      &:nth-child(odd) {
-        margin-right: 7px;
-      }
-      &:nth-child(even) {
-        margin-left: 7px;
-      }
+  }
+  .cardColumn_two {
+    &:nth-child(odd) {
+      margin-right: 7px;
+    }
+    &:nth-child(even) {
+      margin-left: 7px;
     }
   }
 }
@@ -176,14 +175,14 @@
 @media screen and (max-width: 768px) {
   .cardColumn {
     max-width: 500px;
+  }
 
-    &_two {
-      &:nth-child(odd) {
-        margin: 0 auto 25px auto;
-      }
-      &:nth-child(even) {
-        margin: 0 auto 25px auto;
-      }
+  .cardColumn_two {
+    &:nth-child(odd) {
+      margin: 0 auto 25px auto;
+    }
+    &:nth-child(even) {
+      margin: 0 auto 25px auto;
     }
   }
 }
@@ -197,10 +196,8 @@
     &:nth-child(even) {
       margin: 0 auto 20px auto;
     }
-    &_two {
-      .body {
-        flex-direction: column;
-      }
-    }
+  }
+  .cardColumn_two .body {
+    flex-direction: column;
   }
 }

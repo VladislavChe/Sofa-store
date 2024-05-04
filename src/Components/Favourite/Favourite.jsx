@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import No from "../../img/no-favorites.png";
 import { ReactComponent as Vektor } from "../../img/vector-back.svg";
@@ -20,9 +20,9 @@ const Favourite = () => {
     basketItems,
     setFavouriteModels,
     models,
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setShowHeaderModels(false);
   }, [setShowHeaderModels]);
 
