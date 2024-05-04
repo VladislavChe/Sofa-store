@@ -75,20 +75,17 @@ const Gallery = () => {
       setVisibleAutoCompleteMenu(false);
     };
 
-    const onFilterItems = allModels.filter((item) =>
+    const filteredItems = allModels.filter((item) =>
       item.description.toLowerCase().includes(searchValue.toLowerCase()),
     );
 
-    const itemDiscription = onFilterItems.map((item) => item.description);
+    if (filteredItems.length > 0) {
+      const descriptions = filteredItems.map((item) => item.description);
+      const unique = descriptions.filter(
+        (el, id) => descriptions.indexOf(el) === id,
+      );
 
-    const makeUniq = (arr) => {
-      return arr.filter((el, id) => arr.indexOf(el) === id);
-    };
-
-    const removeDublicate = makeUniq(itemDiscription);
-
-    if (onFilterItems.length > 0) {
-      return removeDublicate.map((obj, index) => (
+      return unique.map((obj, index) => (
         <li key={index} onClick={() => closeAutoCompleteMenu(obj)}>
           <span>{obj}</span>
         </li>
