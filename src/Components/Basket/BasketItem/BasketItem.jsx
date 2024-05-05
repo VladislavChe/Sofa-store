@@ -1,46 +1,42 @@
-import React from 'react';
-import AppContext from '../../../context';
-import Plus from '../../_Utils/Plus/Plus';
-import styles from './BasketItem.module.scss';
+import React, { useContext, useState } from "react";
+import AppContext from "../../../context";
+import Plus from "../../_Utils/Plus/Plus";
+import styles from "./BasketItem.module.css";
 
-const BasketItem = ({ item, index, id, onRemoveItem }) => {
-  const { totalPrice, setTotalPrice } = React.useContext(AppContext);
+const BasketItem = ({ item: { title, price, url }, removeHandler }) => {
+  const { totalPrice, setTotalPrice } = useContext(AppContext);
 
-  const [count, setCount] = React.useState(1);
+  const [count, setCount] = useState(1);
 
-  const changeCount = (boolean, price) => {
+  const changeCount = (boolean, price) => () => {
     if (boolean) {
       setCount(count + 1);
       setTotalPrice(totalPrice + price);
-    } else {
-      if (count > 1) {
-        setCount(count - 1);
-        setTotalPrice(totalPrice - price);
-      }
+    } else if (count > 1) {
+      setCount(count - 1);
+      setTotalPrice(totalPrice - price);
     }
   };
 
   return (
-    <>
-      <li key={`${item} ${index}`} className={styles.item}>
-        <div className={styles.counterWrapp}>
-          <img className={styles.modelPic} src={item.url} alt="sofa" />
-          <div className={styles.counter}>
-            <div onClick={() => changeCount(false, item.price)} className={styles.less}></div>
-            <div className={styles.count}>{count}</div>
-            <div onClick={() => changeCount(true, item.price)} className={styles.more}></div>
-          </div>
+    <li className={styles.item}>
+      <div className={styles.counterWrap}>
+        <img className={styles.modelPic} src={url} alt="sofa" />
+        <div className={styles.counter}>
+          <div onClick={changeCount(false, price)} className={styles.less} />
+          <div className={styles.count}>{count}</div>
+          <div onClick={changeCount(true, price)} className={styles.more} />
         </div>
+      </div>
 
-        <div className={styles.wrapper}>
-          <h4>{item.title}</h4>
-          <span>{item.price} руб.</span>
-        </div>
-        <div onClick={() => onRemoveItem(id)}>
-          <Plus check={false} deg45={true} />
-        </div>
-      </li>
-    </>
+      <div className={styles.wrapper}>
+        <h4>{title}</h4>
+        <span>{price} руб.</span>
+      </div>
+      <div onClick={removeHandler}>
+        <Plus check={false} deg45={true} />
+      </div>
+    </li>
   );
 };
 

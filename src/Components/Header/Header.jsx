@@ -1,118 +1,131 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import armchairs from '../../img/armchairs.png';
-import beds from '../../img/beds.png';
-import { ReactComponent as Cart } from '../../img/cart.svg';
-import chairs from '../../img/chairs.png';
-import exclusive from '../../img/exclusive.png';
-import { ReactComponent as Hurt } from '../../img/hurt.svg';
-import logo from '../../img/logo.png';
-import mattresses from '../../img/mattresses.png';
-import poufs from '../../img/poufs.png';
-import sofa from '../../img/sofa.png';
-import AppContext from './../../context';
-import styles from './Header.module.scss';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import classNames from "classnames";
+import { NavLink } from "react-router-dom";
+import armchairs from "../../img/armchairs.png";
+import beds from "../../img/beds.png";
+import { ReactComponent as Cart } from "../../img/cart.svg";
+import chairs from "../../img/chairs.png";
+import exclusive from "../../img/exclusive.png";
+import { ReactComponent as Hurt } from "../../img/hurt.svg";
+import logo from "../../img/logo.png";
+import mattresses from "../../img/mattresses.png";
+import poufs from "../../img/poufs.png";
+import sofa from "../../img/sofa.png";
+import AppContext from "./../../context";
+import styles from "./Header.module.css";
 
-const Header = (props) => {
+const Header = () => {
   const { allModels, setModels, showHeaderModels, showCart, totalPrice } =
-    React.useContext(AppContext);
+    useContext(AppContext);
 
   const headerModels = [
     {
       url: sofa,
-      title: 'Диваны',
-      description: 'Диваны',
+      title: "Диваны",
+      description: "Диваны",
     },
     {
       url: armchairs,
-      title: 'Кресла',
-      description: 'Кресла',
+      title: "Кресла",
+      description: "Кресла",
     },
     {
       url: chairs,
-      title: 'Стулья',
-      description: 'Стулья',
+      title: "Стулья",
+      description: "Стулья",
     },
     {
       url: beds,
-      title: 'Кровати',
-      description: 'Кровати',
+      title: "Кровати",
+      description: "Кровати",
     },
     {
       url: mattresses,
-      title: 'Матрацы',
-      description: 'Матрацы',
+      title: "Матрацы",
+      description: "Матрацы",
     },
     {
       url: poufs,
-      title: 'Пуфы',
-      description: 'Пуфы',
+      title: "Пуфы",
+      description: "Пуфы",
     },
     {
       url: exclusive,
-      title: 'Эксклюзивная мебель',
-      description: 'Эксклюзивная мебель',
+      title: "Эксклюзивная мебель",
+      description: "Эксклюзивная мебель",
     },
   ];
 
   //Сортировка из шапки
-  const [activeItem, setActiveItem] = React.useState(false);
-  const [activeIndex, setActiveIndex] = React.useState(false);
+  const [activeItem, setActiveItem] = useState(null);
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  const onClickItem = (obj, index, title) => {
+  const onClickItem = (obj, index) => () => {
     setActiveItem(obj);
     setActiveIndex(index);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeItem) {
       setModels(
         allModels.filter((item) =>
-          item.description.toLowerCase().includes(activeItem.title.toLowerCase()),
+          item.description
+            .toLowerCase()
+            .includes(activeItem.title.toLowerCase()),
         ),
       );
     }
-  }, [activeItem]);
+  }, [activeItem, setModels, allModels]);
 
   //Клик вне элемента
-  const itemsRef = React.useRef();
-  React.useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick);
+  const itemsRef = useRef();
+  useEffect(() => {
+    document.body.addEventListener("click", handleOutsideClick);
+    return () => document.body.removeEventListener("click", handleOutsideClick);
   }, []);
   const handleOutsideClick = (e) => {
-    if (!e.path.includes(itemsRef.current)) {
-      setActiveIndex(false);
-    }
+    !itemsRef.current?.contains(e.target) && setActiveIndex(null);
   };
+
+  const showCartHandler = () => showCart(true);
 
   return (
     <header className={styles.header}>
-      <nav className={styles.menu}>
-        <ul className={`justify-between align-center d-flex ${styles.list}`}>
+      <nav>
+        <ul
+          className={classNames(
+            "justify-between align-center d-flex",
+            styles.list,
+          )}
+        >
           <li>
-            <NavLink to={'/'}>
+            <NavLink to={"/"}>
               <img src={logo} alt="logo" className={styles.logo} />
             </NavLink>
           </li>
-          <li className={`d-flex align-center ${styles.added}`}>
-            <NavLink to={'/favourite'}>
-              <Hurt width={'20px'} height={'20px'} />
+          <li className={classNames("d-flex align-center", styles.added)}>
+            <NavLink to={"/favourite"}>
+              <Hurt width={"20px"} height={"20px"} />
             </NavLink>
-            <div onClick={() => showCart(true)} className={styles.summ}>
+            <div onClick={showCartHandler}>
               <span>{totalPrice} руб.</span>
-              <Cart width={'30px'} height={'30px'} />
-              <div className={totalPrice > 0 ? styles.gold : null}></div>
+              <Cart width={"30px"} height={"30px"} />
+              <div className={classNames({ [styles.gold]: totalPrice > 0 })} />
             </div>
           </li>
         </ul>
       </nav>
       {showHeaderModels && (
-        <ul ref={itemsRef} className={`${styles.furniture} d-flex align-center`}>
+        <ul
+          ref={itemsRef}
+          className={classNames(styles.furniture, "d-flex align-center")}
+        >
           {headerModels.map((obj, index) => (
             <li
-              className={activeIndex === index ? styles.active : null}
-              onClick={() => onClickItem(obj, index, obj.title)}
-              key={`${obj} ${index}`}>
+              className={classNames({ [styles.active]: activeIndex === index })}
+              onClick={onClickItem(obj, index, obj.title)}
+              key={index}
+            >
               <img src={obj.url} alt={obj.title} />
               <span>{obj.title}</span>
             </li>

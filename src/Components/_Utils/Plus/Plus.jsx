@@ -1,6 +1,7 @@
-import React from 'react';
-import Check from '../../../img/check-arrow.jpg';
-import styles from './Plus.module.scss';
+import React from "react";
+import classNames from "classnames";
+import Check from "../../../img/check-arrow.jpg";
+import styles from "./Plus.module.css";
 
 const Plus = ({ deg45, check }) => {
   return (
@@ -9,7 +10,9 @@ const Plus = ({ deg45, check }) => {
         <img className={styles.img} src={Check} alt="check" />
       ) : (
         <div className={styles.closeWrap}>
-          <span className={`${styles.close} ${deg45 ? styles.deg45 : null}`}></span>
+          <span
+            className={classNames(styles.close, { [styles.deg45]: deg45 })}
+          />
         </div>
       )}
     </div>

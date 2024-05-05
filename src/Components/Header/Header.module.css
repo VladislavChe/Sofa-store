@@ -4,34 +4,32 @@
   font-weight: 600;
 }
 
-.list {
-  li {
-    cursor: pointer;
+.list li {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
     transition: all 0.2s ease-in-out;
-    &:hover {
-      transition: all 0.2s ease-in-out;
-      color: #ff9619;
+    color: #ff9619;
 
-      span {
-        color: #000;
-      }
+    span {
+      color: #000;
     }
-    svg * {
-      transition: all 0.55s ease-in-out;
-    }
+  }
+  svg * {
+    transition: all 0.55s ease-in-out;
   }
 }
 
 .tel {
   transition: all 0.2s ease-in-out;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .added {
   position: relative;
 
   span {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Open Sans", sans-serif;
     transition: all 0.2s ease-in-out;
   }
 
@@ -53,23 +51,23 @@
 
 .furniture {
   margin-top: 55px;
+}
 
-  li {
-    cursor: pointer;
+.furniture li {
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
     transition: all 0.2s ease-in-out;
-    &:hover {
-      transition: all 0.2s ease-in-out;
-      color: #ff9619;
-    }
-    img {
-      width: 181px;
-      height: 122px;
-    }
-    span {
-      display: block;
-      margin: 0 auto;
-      text-align: center;
-    }
+    color: #ff9619;
+  }
+  img {
+    width: 181px;
+    height: 122px;
+  }
+  span {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
   }
 }
 

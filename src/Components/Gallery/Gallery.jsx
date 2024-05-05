@@ -1,14 +1,14 @@
-import React from 'react';
-import { ReactComponent as Layout4 } from '../../img/layout-4.svg';
-//pictures
-import { ReactComponent as Layout8 } from '../../img/layout-8.svg';
-import { ReactComponent as SearchLoop } from '../../img/search-loop.svg';
-import Card from '../Card/Card';
-import SubMenu from '../SubMenu/SubMenu';
-import AppContext from './../../context';
-import styles from './Gallery.module.scss';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import classNames from "classnames";
+import { ReactComponent as Layout4 } from "../../img/layout-4.svg";
+import { ReactComponent as Layout8 } from "../../img/layout-8.svg";
+import { ReactComponent as SearchLoop } from "../../img/search-loop.svg";
+import Card from "../Card/Card";
+import SubMenu from "../SubMenu/SubMenu";
+import AppContext from "./../../context";
+import styles from "./Gallery.module.css";
 
-const Gallery = (props) => {
+const Gallery = () => {
   const {
     activeHurt,
     setActiveHurt,
@@ -25,11 +25,11 @@ const Gallery = (props) => {
     searchValue,
     setSearchValue,
     setShowHeaderModels,
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setShowHeaderModels(true);
-  }, []);
+  }, [setShowHeaderModels]);
 
   //Сортировка из searchInput
   const onChangeSearchInput = (event) => {
@@ -42,28 +42,30 @@ const Gallery = (props) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setModels(
       allModels.filter((item) =>
         item.description.toLowerCase().includes(searchValue.toLowerCase()),
       ),
     );
-  }, [searchValue]);
+  }, [searchValue, setModels, allModels]);
 
   //Сортировка по фильтру из subMenu
-  const [activeSubMenuItem, setActiveSubMenuItem] = React.useState('');
-  React.useEffect(() => {
+  const [activeSubMenuItem, setActiveSubMenuItem] = useState("");
+  useEffect(() => {
     setModels(
       allModels.filter((item) =>
-        item.description.toLowerCase().includes(activeSubMenuItem.toLowerCase()),
+        item.description
+          .toLowerCase()
+          .includes(activeSubMenuItem.toLowerCase()),
       ),
     );
-  }, [activeSubMenuItem]);
+  }, [activeSubMenuItem, setModels, allModels]);
 
   //Autocomplete menu
-  const [visibleAutoCompleteMenu, setVisibleAutoCompleteMenu] = React.useState(false);
+  const [visibleAutoCompleteMenu, setVisibleAutoCompleteMenu] = useState(false);
   const clearSearchInput = () => {
-    setSearchValue('');
+    setSearchValue("");
     setVisibleAutoCompleteMenu(false);
     setModels(allModels);
   };
@@ -73,21 +75,18 @@ const Gallery = (props) => {
       setVisibleAutoCompleteMenu(false);
     };
 
-    const onFilterItems = allModels.filter((item) =>
+    const filteredItems = allModels.filter((item) =>
       item.description.toLowerCase().includes(searchValue.toLowerCase()),
     );
 
-    const itemDiscription = onFilterItems.map((item) => item.description);
+    if (filteredItems.length > 0) {
+      const descriptions = filteredItems.map((item) => item.description);
+      const unique = descriptions.filter(
+        (el, id) => descriptions.indexOf(el) === id,
+      );
 
-    const makeUniq = (arr) => {
-      return arr.filter((el, id) => arr.indexOf(el) === id);
-    };
-
-    const removeDublicate = makeUniq(itemDiscription);
-
-    if (onFilterItems.length > 0) {
-      return removeDublicate.map((obj, index) => (
-        <li key={`${obj} ${index}`} onClick={() => closeAutoCompleteMenu(obj)}>
+      return unique.map((obj, index) => (
+        <li key={index} onClick={() => closeAutoCompleteMenu(obj)}>
           <span>{obj}</span>
         </li>
       ));
@@ -95,48 +94,54 @@ const Gallery = (props) => {
       return <span className={styles.notSearch}>ничего не найдено</span>;
     }
   };
-  const autoCompleteMenuRef = React.useRef();
-  React.useEffect(() => {
-    document.body.addEventListener('click', handleOutsideClick);
+  const autoCompleteMenuRef = useRef();
+  useEffect(() => {
+    document.body.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.body.removeEventListener("click", handleOutsideClick);
+    };
   }, []);
   const handleOutsideClick = (e) => {
-    if (!e.path.includes(autoCompleteMenuRef.current)) {
+    !autoCompleteMenuRef.current?.contains(e.target) &&
       setVisibleAutoCompleteMenu(false);
-    }
   };
 
   // Выбор раскладки моделей
   const layouts = [
-    <Layout8 width={'55px'} height={'26px'} />,
-    <Layout4 width={'55px'} height={'26px'} />,
+    <Layout8 width={"55px"} height={"26px"} />,
+    <Layout4 width={"55px"} height={"26px"} />,
   ];
-  const [activeLayout, setActiveLayout] = React.useState(0);
-  const onSelectLayout = (index) => {
+  const [activeLayout, setActiveLayout] = useState(0);
+  const onSelectLayout = (index) => () => {
     setActiveLayout(index);
   };
 
   return (
     <div className={styles.gallery}>
-      <div className={`${styles.searchRow} d-flex align-center`}>
+      <div className={classNames(styles.searchRow, "d-flex align-center")}>
         <SubMenu
           allModels={allModels}
           setModels={setModels}
           setActiveSubMenuItem={setActiveSubMenuItem}
           searchValue={searchValue}
         />
-        <div className={`${styles.layouts} d-flex`}>
-          {layouts.map((layout, index) => {
-            return (
-              <div
-                onClick={() => onSelectLayout(index)}
-                className={`${styles.layout} ${activeLayout === index ? styles.activeLayout : ''}`}
-                key={`${layout} ${index}`}>
-                {layout}
-              </div>
-            );
-          })}
+        <div className={classNames(styles.layouts, "d-flex")}>
+          {layouts.map((layout, index) => (
+            <div
+              onClick={onSelectLayout(index)}
+              className={classNames(styles.layout, {
+                [styles.activeLayout]: activeLayout === index,
+              })}
+              key={index}
+            >
+              {layout}
+            </div>
+          ))}
         </div>
-        <div ref={autoCompleteMenuRef} className={`${styles.searchInput} pos-r`}>
+        <div
+          ref={autoCompleteMenuRef}
+          className={classNames(styles.searchInput, "pos-r")}
+        >
           <input
             onChange={onChangeSearchInput}
             value={searchValue}
@@ -148,14 +153,20 @@ const Gallery = (props) => {
               очистить
             </span>
           ) : (
-            <SearchLoop width={'19px'} height={'19px'} />
+            <SearchLoop width={"19px"} height={"19px"} />
           )}
-          {visibleAutoCompleteMenu ? (
-            <ul className={styles.autoCompleteList}>{searchValue ? autoCompleteMenu() : null}</ul>
-          ) : null}
+          {visibleAutoCompleteMenu && (
+            <ul className={styles.autoCompleteList}>
+              {searchValue && autoCompleteMenu()}
+            </ul>
+          )}
         </div>
       </div>
-      <div className={`${styles.models} ${activeLayout === 1 ? styles.models_two : ''}`}>
+      <div
+        className={classNames(styles.models, {
+          [styles.models_two]: activeLayout === 1,
+        })}
+      >
         {models.map((obj, index) => (
           <Card
             activeLayout={activeLayout}
@@ -164,7 +175,7 @@ const Gallery = (props) => {
             activeHurt={activeHurt}
             setActiveHurt={setActiveHurt}
             addToCart={addToCart}
-            key={`${obj} ${index}`}
+            key={index}
             index={index}
             id={obj.id}
             url={obj.url}

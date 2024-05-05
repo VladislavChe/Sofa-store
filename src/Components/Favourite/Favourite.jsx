@@ -1,13 +1,13 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import No from '../../img/no-favorites.png';
-import { ReactComponent as Vektor } from '../../img/vector-back.svg';
-import Info from '../_Utils/Info/Info';
-import AppContext from './../../context';
-import Card from './../Card/Card';
-import styles from './Favourite.module.scss';
+import React, { useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
+import No from "../../img/no-favorites.png";
+import { ReactComponent as Vektor } from "../../img/vector-back.svg";
+import Info from "../_Utils/Info/Info";
+import AppContext from "./../../context";
+import Card from "./../Card/Card";
+import styles from "./Favourite.module.css";
 
-const Favourite = ({}) => {
+const Favourite = () => {
   const {
     activeHurt,
     setActiveHurt,
@@ -20,16 +20,18 @@ const Favourite = ({}) => {
     basketItems,
     setFavouriteModels,
     models,
-  } = React.useContext(AppContext);
+  } = useContext(AppContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setShowHeaderModels(false);
-  }, []);
+  }, [setShowHeaderModels]);
+
+  const hasFavorite = favouriteModels.length > 0;
 
   return (
     <div className={styles.favourite}>
       <div className={styles.row}>
-        <NavLink to={'/'}>
+        <NavLink to={"/"}>
           <div className={styles.back}>
             <Vektor />
           </div>
@@ -37,23 +39,26 @@ const Favourite = ({}) => {
         <h1>Избранное</h1>
       </div>
       <ul
-        className={!favouriteModels.length > 0 ? styles.favouriteList_empty : styles.favouriteList}>
-        {!favouriteModels.length > 0 ? (
+        className={
+          !hasFavorite ? styles.favouriteList_empty : styles.favouriteList
+        }
+      >
+        {!hasFavorite ? (
           <Info
             nav={true}
             img={No}
-            title={'Избранных нет :('}
-            description={'Вы ничего не добавляли в закладки'}
+            title={"Избранных нет :("}
+            description={"Вы ничего не добавляли в закладки"}
           />
         ) : (
           favouriteModels.map((obj, index) => (
             <Card
+              key={index}
               activeHurt={activeHurt}
               setActiveHurt={setActiveHurt}
               activePlus={activePlus}
               setActivePlus={setActivePlus}
               addToCart={addToCart}
-              key={`${obj} ${index}`}
               index={obj.index}
               id={obj.id}
               url={obj.url}
